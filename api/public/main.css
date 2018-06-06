@@ -1,0 +1,141 @@
+html {
+    background-color: #0296e6;
+    font-family: 'arial', sans-serif;
+    color: #FFF;
+}
+
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button, label#fileLabel {
+    padding: 1.5em 3em;
+    line-height: 0;
+    border: none;
+    background-color: #FFF;
+    color: #0296e6;
+    font-size: 1em;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    box-shadow: 0 1px 2px #24416b;
+}
+
+button:active, label#fileLabel:active {
+    background-color: #3b3b3b;
+}
+
+div#fileInput.retake label#fileLabel {
+    color: #FFF;
+    background-color: #0296e6;
+    box-shadow: none;
+    padding: 1.5em 0;
+}
+
+button:disabled {
+    display: none;
+}
+
+button[type=submit] {
+    bottom: 1em;
+}
+
+label#fileLabel {
+    display: block;
+}
+
+div#fileInput {
+    position: relative;
+    display: inline-block;
+}
+
+div#fileInput.retake {
+    position: absolute;
+    bottom: 0;
+    left: 1em;
+}
+
+input#file {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+}
+
+h2#message {
+    display: none;
+}
+
+div#imgContainer {
+    height: 100%;
+    flex-grow: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+img#preview {
+    border-radius: 4px;
+    max-height: 100%;
+    align-self: center
+}
+
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.rotate180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.rotate270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}

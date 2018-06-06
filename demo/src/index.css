@@ -1,0 +1,29 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.code {
+	margin: 20px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	display: inline;
+}
+
+li img {
+	max-width: 150px;
+	max-height: 150px;
+}
+
+li a {
+	width: 300px;
+	padding: 20px;
+	word-wrap: break-word;
+	display: inline-block;
+}
