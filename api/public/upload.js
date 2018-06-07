@@ -1,7 +1,13 @@
 document.addEventListener("DOMContentLoaded", function(e) {
+    var cropper;
+
     document.getElementById('file').onchange = function(event) {
         document.getElementById('message').style.display = "none";
         document.documentElement.style.background = "#0296e6";
+
+        if (cropper) {
+            cropper.destroy();
+        }
 
         var image = document.getElementById('preview');
 
@@ -58,7 +64,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
                         }
 
                         document.getElementById('imgContainer').style.opacity = 1;
+
+                        cropper = new Cropper(image, {
+                            initialAspectRatio: NaN,
+                            viewMode: 2
+                        });
                     });
+
+                    this.removeEventListener('load', arguments.callee);
                 }
 
                 image.addEventListener("load", configImage);
@@ -85,13 +98,32 @@ document.addEventListener("DOMContentLoaded", function(e) {
         document.getElementById('message').innerHTML = '<img src="/loading.gif" alt="loading">';
         document.getElementById('message').style.display = "block";
         
-        var url = window.location.href.split("/");
-        var uid = url[url.length - 1];
-        var request = new XMLHttpRequest();
         var form = new FormData();
         var files = document.getElementById('file').files;
 
-        form.append('file', files[0], files[0].name);
+        if (cropper) {
+            cropper.getCroppedCanvas({
+                maxWidth: 1000,
+                maxHeight: 1000
+            }).toBlob(
+                function(blob) {
+                    form.append('file', blob, files[0].name);
+                    cropper.destroy(); // remove cropper
+                    sendImage(form);
+                },
+                'image/jpeg',
+                0.95
+            );
+        } else {
+            form.append('file', files[0], files[0].name);
+            sendImage(form);
+        }
+    };
+
+    var sendImage = function(form) {
+        var url = window.location.href.split("/");
+        var uid = url[url.length - 1];
+        var request = new XMLHttpRequest();
 
         request.onreadystatechange = function() {
             if (request.status === 0) {

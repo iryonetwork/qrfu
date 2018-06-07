@@ -85,6 +85,7 @@ h2#message {
 
 div#imgContainer {
     height: 100%;
+    min-height: 0; /* fix for firefox, which defaults to auto for min height */
     flex-grow: 1;
     display: none;
     align-items: center;
@@ -95,7 +96,7 @@ div#imgContainer {
 img#preview {
     border-radius: 4px;
     max-height: 100%;
-    align-self: center
+    align-self: center;
 }
 
 .rotate90 {
