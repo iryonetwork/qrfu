@@ -24,8 +24,6 @@ exports.fetch = function(req, res) {
 
 exports.upload = function(req, res, next) {
     const id = req.params.uid;
-    
-    console.log(Object.keys(clients));
 
     if (!clients[id]) {
         res.status(500).send("no id");
@@ -35,8 +33,13 @@ exports.upload = function(req, res, next) {
                 next(err);
             } else {
                 const name = req.file.filename;
+                var type = "image"
+                
+                if (req.file.mimetype.startsWith("audio")) {
+                    type = "audio";
+                }
 
-                clients[id].emit('messages', {name: name});
+                clients[id].emit('messages', {name: name, type: type});
                 res.status(200).end();
             }
         });

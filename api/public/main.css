@@ -22,7 +22,7 @@ form {
     align-items: center;
 }
 
-button, label#fileLabel {
+button, label.fileButton {
     padding: 1.5em 3em;
     line-height: 0;
     border: none;
@@ -34,11 +34,11 @@ button, label#fileLabel {
     box-shadow: 0 1px 2px #24416b;
 }
 
-button:active, label#fileLabel:active {
+button:active, label.fileButton:active {
     background-color: #3b3b3b;
 }
 
-div#fileInput.retake label#fileLabel {
+div.fileHolder.retake label.fileButton {
     color: #FFF;
     background-color: #0296e6;
     box-shadow: none;
@@ -53,22 +53,22 @@ button[type=submit] {
     bottom: 1em;
 }
 
-label#fileLabel {
+label.fileButton {
     display: block;
 }
 
-div#fileInput {
+div.fileHolder {
     position: relative;
     display: inline-block;
 }
 
-div#fileInput.retake {
+div.fileHolder.retake {
     position: absolute;
     bottom: 0;
     left: 1em;
 }
 
-input#file {
+input[type=file] {
     position: absolute;
     left: 0;
     top: 0;
@@ -83,7 +83,7 @@ h2#message {
     display: none;
 }
 
-div#imgContainer {
+div#imgContainer, div#audioContainer {
     height: 100%;
     min-height: 0; /* fix for firefox, which defaults to auto for min height */
     flex-grow: 1;
