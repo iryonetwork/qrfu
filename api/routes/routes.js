@@ -9,6 +9,9 @@ module.exports = function(app) {
     app.route('/api/upload/:uid')
         .post(upload.upload);
 
+    app.route('/api/info/:uid')
+        .get(upload.info);
+
     app.route('/api/file/:name')
         .get(upload.download);
     

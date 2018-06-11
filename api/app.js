@@ -17,9 +17,12 @@ var routes = require('./routes/routes');
 routes(app);
 
 io.on('connection', function(client){
-    client.on('join', function(id) {
+    client.on('join', function(id, ratio, filetype, multiple) {
         console.log(`${id} joined`);
         client.uid = id;
+        client.ratio = ratio;
+        client.filetype = filetype;
+        client.multiple = multiple;
         var test = {socket: client.id, uid: id}
         clients[id] = client;
     });

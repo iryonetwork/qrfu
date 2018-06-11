@@ -13,17 +13,13 @@ ul {
 }
 
 li {
-	display: inline;
-}
-
-li img {
-	max-width: 150px;
-	max-height: 150px;
-}
-
-li a {
+	display: inline-block;
 	width: 300px;
 	padding: 20px;
 	word-wrap: break-word;
-	display: inline-block;
+}
+
+li img {
+	max-width: 300px;
+	max-height: 150px;
 }

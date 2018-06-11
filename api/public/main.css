@@ -59,7 +59,7 @@ label.fileButton {
 
 div.fileHolder {
     position: relative;
-    display: inline-block;
+    display: none;
 }
 
 div.fileHolder.retake {
@@ -81,6 +81,7 @@ input[type=file] {
 
 h2#message {
     display: none;
+    padding: 0 1em;
 }
 
 div#imgContainer, div#audioContainer {
@@ -97,6 +98,10 @@ img#preview {
     border-radius: 4px;
     max-height: 100%;
     align-self: center;
+}
+
+audio#audioPreview {
+    flex: 1 0 auto;
 }
 
 .rotate90 {

@@ -3,23 +3,33 @@
 const multer = require('multer');
 const path = require('path');
 const crypto = require("crypto");
+const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads');
     },
     filename: (req, file, cb) => {
-        const newFilename = `${crypto.randomBytes(16).toString("hex")}-${file.originalname}`;
+        const newFilename = `${req.params.uid}-${file.originalname}`;
         cb(null, newFilename);
     },
+    fileFilter: function(req, file, cb) {
+        var type = clients[req.params.uid].filetype;
+
+        if (type === "all" || file.mimetype.startsWith(type)) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+        }
+    }
 });
 const upload = multer({ storage }).single('file');
 
 exports.fetch = function(req, res) {
-    const id = crypto.randomBytes(16).toString("hex");
+    const uid = crypto.randomBytes(16).toString("hex");
     const url = `${req.connection.localAddress}:${req.connection.localPort}`;
-    let image_data = {url: url, uid: id};
-    res.json(image_data);
+    let imageData = {url: url, uid: uid};
+    res.json(imageData);
 };
 
 exports.upload = function(req, res, next) {
@@ -28,12 +38,22 @@ exports.upload = function(req, res, next) {
     if (!clients[id]) {
         res.status(500).send("no id");
     } else {
+        if (!clients[id].multiple) {
+            fs.readdir('./uploads', (error, files) => {
+                if (error) {
+                    throw error;
+                }
+            
+                files.filter(name => name.startsWith(id)).forEach(data => fs.unlink(`./uploads/${data}`, (er) => {console.log(er)}));
+            });
+        }
+
         upload(req, res, function(err) {
             if (err) {
                 next(err);
             } else {
                 const name = req.file.filename;
-                var type = "image"
+                var type = "image";
                 
                 if (req.file.mimetype.startsWith("audio")) {
                     type = "audio";
@@ -43,6 +63,21 @@ exports.upload = function(req, res, next) {
                 res.status(200).end();
             }
         });
+    }
+};
+
+exports.info = function(req, res) {
+    const id = req.params.uid;
+
+    if (!clients[id]) {
+        res.status(500).send("no id");
+    } else {
+        let uploadData = {
+            ratio: clients[id].ratio,
+            filetype: clients[id].filetype,
+            multiple: clients[id].multiple,
+        };
+        res.json(uploadData);
     }
 };
 

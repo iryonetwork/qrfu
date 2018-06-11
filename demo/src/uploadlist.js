@@ -1,9 +1,7 @@
 import React from 'react';
 
 export default function UploadList(props) {
-	const uploads = props.uploads;
-    
-    const items = uploads.map(file => {
+    const items = props.uploads.map(file => {
         if (file.type === "audio") {
             return (<li key={file.name}>
                         <audio src={`http://localhost:3001/api/file/${file.name}`} controls></audio>
