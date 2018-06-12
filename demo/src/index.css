@@ -4,22 +4,60 @@ body {
 	font-family: sans-serif;
 }
 
-.code {
+form {
+	display: inline-block;
+	background-color: aliceblue;
+	padding: 20px;
 	margin: 20px;
 }
 
-ul {
+form input, form button {
+	display: block;
+	margin-bottom: 20px;
+	font-size: 1em;
+	padding: 4px;
+}
+
+form button {
+	margin-bottom: 0;
+}
+
+form p {
+	margin: 0.5em;
+    font-size: 0.8em;
+}
+
+form .profilePic {
+	width: 128px;
+	height: 128px;
+	margin-left: 20px;
+    display: inline-block;
+    background-color: #e4e4e4;
+}
+
+.code {
+	background-color: aliceblue;
+	margin: 20px;
+	padding: 20px;
+}
+
+form > .code {
+	margin: 5px 0 20px 0;
+	padding: 0;
+}
+
+ul.custom {
 	list-style-type: none;
 }
 
-li {
+ul.custom li {
 	display: inline-block;
 	width: 300px;
 	padding: 20px;
 	word-wrap: break-word;
 }
 
-li img {
+ul.custom li img {
 	max-width: 300px;
 	max-height: 150px;
 }

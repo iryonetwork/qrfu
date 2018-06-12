@@ -23,13 +23,19 @@ io.on('connection', function(client){
         client.ratio = ratio;
         client.filetype = filetype;
         client.multiple = multiple;
-        var test = {socket: client.id, uid: id}
         clients[id] = client;
     });
 
-    client.on('disconnect', function () {
-        delete clients[client.uid];
-        console.log("user disconnected");
+    client.on('disconnect', function () {console.log(Object.keys(clients))
+        // there can be multiple clients on one socket, make sure all are removed
+        var keys = Object.keys(clients).filter(function(k) {
+            return clients[k].id === clients[client.uid].id
+        });
+
+        for (var i = 0; i < keys.length; i++) {
+            delete clients[keys[i]];
+            console.log(`${keys[i]} disconnected`);
+        }
     });
 });
 

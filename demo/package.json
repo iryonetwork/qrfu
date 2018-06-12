@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.1",
     "qrcode.react": "^0.8.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-redux-form": "^1.16.9",
     "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
     "socket.io-client": "^2.1.1"
   },
   "scripts": {

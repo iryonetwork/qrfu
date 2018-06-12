@@ -44,7 +44,8 @@ exports.upload = function(req, res, next) {
                     throw error;
                 }
             
-                files.filter(name => name.startsWith(id)).forEach(data => fs.unlink(`./uploads/${data}`, (er) => {console.log(er)}));
+                files.filter(name => name.startsWith(id))
+                    .forEach(data => fs.unlink(`./uploads/${data}`, (er) => {console.log(er)}));
             });
         }
 
@@ -53,13 +54,14 @@ exports.upload = function(req, res, next) {
                 next(err);
             } else {
                 const name = req.file.filename;
+                const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;
                 var type = "image";
                 
                 if (req.file.mimetype.startsWith("audio")) {
                     type = "audio";
                 }
 
-                clients[id].emit('messages', {name: name, type: type});
+                clients[id].emit('messages', {name: name, type: type, url: url, uid: id});
                 res.status(200).end();
             }
         });
