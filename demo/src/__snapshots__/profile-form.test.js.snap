@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form displays 1`] = `undefined`;
+
+exports[`List displays the file links 1`] = `
+<ul>
+  <li>
+    <a
+      href="http://localhost:3001/"
+    >
+      file-img
+    </a>
+  </li>
+  <li>
+    <a
+      href="http://localhost:3001/"
+    >
+      file-audio
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`List displays uploads in their specific formats 1`] = `
+<ul
+  className="custom"
+>
+  <li>
+    <a
+      href="http://localhost:3001/"
+    >
+      <img
+        alt="preview"
+        src="http://localhost:3001/"
+      />
+      <div>
+        file-img
+      </div>
+    </a>
+  </li>
+  <li>
+    <audio
+      controls={true}
+      src="http://localhost:3001/"
+    />
+    <div>
+      file-audio
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`Profile image displays first file 1`] = `
+<img
+  alt="avatar"
+  className="profilePic"
+  src="http://localhost:3001/"
+/>
+`;
+
+exports[`Profile image is set to default empty tag 1`] = `
+<div
+  className="profilePic"
+/>
+`;
