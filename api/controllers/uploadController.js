@@ -2,7 +2,7 @@
 
 const multer = require('multer');
 const path = require('path');
-const crypto = require("crypto");
+const crypto = require('crypto');
 const fs = require('fs');
 
 const storage = multer.diskStorage({
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     fileFilter: function(req, file, cb) {
         var type = clients[req.params.uid].filetype;
 
-        if (type === "all" || file.mimetype.startsWith(type)) {
+        if (type === 'all' || file.mimetype.startsWith(type)) {
             cb(null, true);
         } else {
             cb(null, false);
@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage }).single('file');
 
 exports.fetch = function(req, res) {
-    const uid = crypto.randomBytes(16).toString("hex");
+    const uid = crypto.randomBytes(16).toString('hex');
     const url = `${req.connection.localAddress}:${req.connection.localPort}`;
     let imageData = {url: url, uid: uid};
     res.json(imageData);
@@ -36,7 +36,7 @@ exports.upload = function(req, res, next) {
     const id = req.params.uid;
 
     if (!clients[id]) {
-        res.status(500).send("no id");
+        res.status(500).send('no id');
     } else {
         if (!clients[id].multiple) {
             fs.readdir('./uploads', (error, files) => {
@@ -55,10 +55,10 @@ exports.upload = function(req, res, next) {
             } else {
                 const name = req.file.filename;
                 const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;
-                var type = "image";
+                var type = 'image';
                 
-                if (req.file.mimetype.startsWith("audio")) {
-                    type = "audio";
+                if (req.file.mimetype.startsWith('audio')) {
+                    type = 'audio';
                 }
 
                 clients[id].emit('messages', {name: name, type: type, url: url, uid: id});
@@ -72,7 +72,7 @@ exports.info = function(req, res) {
     const id = req.params.uid;
 
     if (!clients[id]) {
-        res.status(500).send("no id");
+        res.status(500).send('no id');
     } else {
         let uploadData = {
             ratio: clients[id].ratio,

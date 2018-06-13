@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default function UploadList(props) {
     const items = props.uploads.map(file => {
-        if (file.type === "audio") {
+        if (file.type === 'audio') {
             return (<li key={file.name}>
                         <audio src={`${file.url}`} controls></audio>
                         <div>{file.name}</div>
@@ -13,7 +13,7 @@ export default function UploadList(props) {
         } else {
             return (<li key={file.name}>
                         <a href={`${file.url}`}>
-                            <img src={`${file.url}`} alt="preview" />
+                            <img src={`${file.url}`} alt='preview' />
                             <div>{file.name}</div>
                         </a>
                     </li>);
@@ -21,13 +21,13 @@ export default function UploadList(props) {
     });
     
 	return (
-		<ul className="custom">{items}</ul>
+		<ul className='custom'>{items}</ul>
 	);
 }
 
 export function LinkList(props) {
     const items = props.uploads.map(file => 
-        (<li>
+        (<li key={file.name}>
             <a href={`${file.url}`}>
                 {file.name}
             </a>
@@ -42,11 +42,11 @@ export function LinkList(props) {
 export function ProfileImage(props) {
     if (props.uploads.length > 0) {
         return (
-            <img className="profilePic" src={`${props.uploads[0].url}`} alt="avatar" />
+            <img className='profilePic' src={`${props.uploads[0].url}`} alt='avatar' />
         );
     } else {
         return (
-            <div className="profilePic"></div>
+            <div className='profilePic'></div>
         );
     }
 }

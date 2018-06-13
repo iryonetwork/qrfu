@@ -22,8 +22,8 @@ export default class Upload extends React.Component {
 		super(props);
 		
 		this.state = {
-			url: "",
-			uid: "",
+			url: '',
+			uid: '',
 			uploads: [],
 			isError: false,
         };
@@ -72,17 +72,17 @@ export default class Upload extends React.Component {
     }
 
 	render() {
-		const isLoaded = this.state.uid !== "";
+		const isLoaded = this.state.uid !== '';
 
 		if (this.state.isError) {
 			return (
-				<div className="code">
+				<div className='code'>
 					Error. Please reload the page.
 				</div>
 			);
 		} else {
 			return (
-				<div className="code">
+				<div className='code'>
 					{isLoaded && 
 						<QRCode value={`http://${this.state.url}/ui/${this.state.uid}`} />
 					}
