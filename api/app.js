@@ -18,19 +18,24 @@ routes(app);
 
 io.on('connection', function(client){
     client.on('join', function(id, ratio, filetype, multiple) {
-        console.log(`${id} joined`);
-        client.uid = id;
-        client.ratio = ratio;
-        client.filetype = filetype;
-        client.multiple = multiple;
-        clients[id] = client;
+        console.log(`${id} joined ${filetype}`);
+
+        const data = {
+            uid: id,
+            ratio: ratio,
+            filetype: filetype,
+            multiple: multiple,
+            socket: client,
+        };
+
+        clients[id] = data;
     });
 
     client.on('disconnect', function () {console.log(Object.keys(clients))
         // there can be multiple clients on one socket, make sure all are removed
-        var keys = Object.keys(clients).filter(function(k) {
-            return clients[k].id === clients[client.uid].id
-        });
+        var keys = Object.keys(clients).filter(k =>
+            clients[k].socket.id === clients[client.uid].socket.id
+        );
 
         for (var i = 0; i < keys.length; i++) {
             delete clients[keys[i]];

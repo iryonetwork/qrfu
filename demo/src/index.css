@@ -4,6 +4,11 @@ body {
 	font-family: sans-serif;
 }
 
+h2 {
+	margin: 10px 0 0 10px;
+	font-size: 1.2em;
+}
+
 form {
 	display: inline-block;
 	background-color: aliceblue;

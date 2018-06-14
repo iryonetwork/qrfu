@@ -61,7 +61,7 @@ exports.upload = function(req, res, next) {
                     type = 'audio';
                 }
 
-                clients[id].emit('messages', {name: name, type: type, url: url, uid: id});
+                clients[id].socket.emit('messages', {name: name, type: type, url: url, uid: id});
                 res.status(200).end();
             }
         });

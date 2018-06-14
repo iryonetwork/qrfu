@@ -12,7 +12,7 @@ export default class ProfileForm extends React.Component {
 	}
 
 	handleSubmit(user) {
-		console.log(user);
+		alert(`{name: "${user.name}", password: "${user.password}", avatar: "${user.avatar}"}`);
 	}
 
 	handleUpload(files) {
@@ -26,7 +26,7 @@ export default class ProfileForm extends React.Component {
 				onSubmit={(user) => this.handleSubmit(user)}
 			>
 				<label>Username:</label>
-				<Control.text model='user.name' id='user'/>
+				<Control.text model='user.name'/>
 				<label>Password:</label>
 				<Control.text type='password' model='user.password' />
 				<label>Profile Image:</label>
