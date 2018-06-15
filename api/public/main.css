@@ -79,7 +79,7 @@ input[type=file] {
     opacity: 0;
 }
 
-h2#message {
+h2#message, h1#timer {
     display: none;
     padding: 0 1em;
 }
@@ -92,6 +92,19 @@ div#imgContainer, div#audioContainer, div#audioControls {
     align-items: center;
     justify-content: center;
     margin-bottom: 1em;
+}
+
+div#audioControls {
+    align-items: flex-end;
+    margin-bottom: 0;
+}
+
+#stopButton {
+    padding: 0;
+}
+
+#stopButton > img {
+    max-height: 4em;
 }
 
 img#preview {

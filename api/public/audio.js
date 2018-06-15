@@ -2,7 +2,7 @@
 
 var setupAudio = function() {
     return new Promise((resolve, reject) => {
-        
+
         if (navigator.mediaDevices
                 && navigator.mediaDevices.enumerateDevices
                 && typeof MediaRecorder !== "undefined") {
@@ -65,28 +65,49 @@ var onUploadAudio = function(event) {
 };
 
 var onClickAudio = function(event) {
+    document.documentElement.style.background = '#0296e6';
     document.getElementById('audioInput').style.display = 'none';
 
     document.getElementById('submit').disabled = true;
 
     document.getElementById('audioContainer').style.display = 'none';
 
-    document.getElementById('audioControls').style.display = 'block';
+    document.getElementById('audioControls').style.display = 'flex';
 
     document.getElementById('fileInput').style.display = 'none';
 
-    document.getElementById('message').innerText = 'Recording...';
+    document.getElementById('message').innerText = 'Recording';
     document.getElementById('message').style.display = 'block';
 
-    var onSuccess = function(stream) {
+    document.getElementById('timer').innerText = '0:00';
+    document.getElementById('timer').style.display = 'block';
 
+    var count = 0;
+
+    var timer = window.setInterval(() => {
+        count++;
+        
+        var min = Math.floor(count / 60);
+        var sec = count - (min * 60);
+
+        if (sec < 10) {
+            sec = "0" + sec;
+        }
+
+        document.getElementById('timer').innerText = `${min}:${sec}`;
+    }, 1000);
+
+    var onSuccess = function(stream) {
         var recorder = new MediaRecorder(stream);
         var chunks = [];
 
-        document.getElementById('stopBtn').onclick = function(e) {
+        document.getElementById('stopButton').onclick = function(e) {
             document.getElementById('audioControls').style.display = 'none';
             document.getElementById('message').style.display = 'none';
             document.getElementById('message').innerText = '';
+            document.getElementById('timer').style.display = 'none';
+            window.clearInterval(timer);
+
             recorder.stop();
         };
 
@@ -96,14 +117,14 @@ var onClickAudio = function(event) {
 
         recorder.onstop = function(e) {
             var blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' });
-            chunks = [];
             var url = window.URL.createObjectURL(blob);
+            chunks = [];
 
             window.blob = blob;
 
             document.getElementById('audioContainer').style.display = 'flex';
             document.getElementById('audioPreview').src = url;
-            document.getElementById('audioButton').innerText = 'RERECORD';
+            document.getElementById('audioButton').innerText = 'RETAKE';
             document.getElementById('audioInput').style.display = 'block';
             document.getElementById('audioInput').className = 'fileHolder retake';
             document.getElementById('submit').disabled = false;
@@ -131,7 +152,7 @@ var onSubmitAudioAlt = function(event) {
         document.getElementById('submit').disabled = false;
         document.getElementById('upload').onsubmit = onUploadAudioAlt;
 
-        document.getElementById('audioButton').innerText = 'RERECORD';
+        document.getElementById('audioButton').innerText = 'RETAKE';
         document.getElementById('audioInput').className = 'fileHolder retake';
 
         document.getElementById('fileInput').style.display = 'none';
