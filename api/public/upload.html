@@ -15,25 +15,41 @@
     </head>
     <body>
         <form id="upload" autocomplete="off">
+
             <h1>Upload Document</h1>
+
             <img src="/loading.gif" id="spinner" alt="loading">
+
             <div id="fileInput" class="fileHolder">
                 <label id="fileLabel" class="fileButton" for="file">TAKE PHOTO</label>
                 <input name="file" id="file" type="file" accept="image/*" capture=“camera”>
             </div>
+
             <div id="audioInput" class="fileHolder">
-                <label id="audioLabel" class="fileButton" for="audio">RECORD AUDIO</label>
+                <button type="button" id="audioButton">RECORD AUDIO</button>
+            </div>
+
+            <div id="audioInputAlt" class="fileHolder">
+                <label id="audioButtonAlt" class="fileButton" for="audio">RECORD AUDIO</label>
                 <input name="audio" id="audio" type="file" accept="audio/*" capture="microphone">
             </div>
+
             <div id="imgContainer">
                 <img id="preview" src="#">
             </div>
+
             <div id="audioContainer">
                 <audio id="audioPreview" controls>
                     Your browser does not support the audio element.
                 </audio>
             </div>
+
             <h2 id="message"></h2>
+
+            <div id="audioControls">
+                <button type="button" id="stopBtn">STOP</button>
+            </div>
+
             <button id="submit" type="submit" disabled>SUBMIT</button>
         </form>
     </body>

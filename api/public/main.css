@@ -38,7 +38,7 @@ button:active, label.fileButton:active {
     background-color: #3b3b3b;
 }
 
-div.fileHolder.retake label.fileButton {
+div.fileHolder.retake label.fileButton, div.fileHolder.retake button {
     color: #FFF;
     background-color: #0296e6;
     box-shadow: none;
@@ -84,7 +84,7 @@ h2#message {
     padding: 0 1em;
 }
 
-div#imgContainer, div#audioContainer {
+div#imgContainer, div#audioContainer, div#audioControls {
     height: 100%;
     min-height: 0; /* fix for firefox, which defaults to auto for min height */
     flex-grow: 1;

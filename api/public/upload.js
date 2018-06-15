@@ -10,15 +10,11 @@ var setup = function() {
     var uid = url[url.length - 1];
     var request = new XMLHttpRequest();
 
-    request.responseType = 'json';
-
     request.onload = function() {
-        var json = request.response;
-        
         if (request.status === 200) {
             document.getElementById('spinner').style.display = 'none';
 
-            settings = json;
+            settings = JSON.parse(request.response);
 
             setupButtons();
         } else {
@@ -27,6 +23,8 @@ var setup = function() {
             } else {
                 document.getElementById('message').innerText = 'Failed to connect to server, please try again.';
             }
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('spinner').style.display = 'none';
         }
     };
     
@@ -61,7 +59,7 @@ var sendFile = function(form) {
         document.getElementById('message').innerHTML = '';
         document.getElementById('message').style.display = 'block';
         document.getElementById('fileLabel').innerText = 'TAKE PHOTO';
-        document.getElementById('audioLabel').innerText = 'RECORD AUDIO';
+        document.getElementById('audioButton').innerText = 'RECORD AUDIO';
         document.getElementById('upload').reset();
 
         if (settings.multiple) {
@@ -88,7 +86,6 @@ var sendFile = function(form) {
 
 document.addEventListener('DOMContentLoaded', function(e) {
     document.getElementById('file').onchange = onSubmitImage;
-    document.getElementById('audio').onchange = onSubmitAudio;
 
-    setup();
+    setupAudio().then(setup);
 });
