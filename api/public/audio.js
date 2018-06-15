@@ -2,19 +2,27 @@
 
 var setupAudio = function() {
     return new Promise((resolve, reject) => {
-        if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices && typeof MediaRecorder !== "undefined") {
+        
+        if (navigator.mediaDevices
+                && navigator.mediaDevices.enumerateDevices
+                && typeof MediaRecorder !== "undefined") {
+            
             navigator.mediaDevices.enumerateDevices()
-                .then(function(devices) {
-                    devices = devices.filter(d => d.kind === 'audioinput');
+                .then(devices => {
+                    var hasMic = devices.filter(d => d.kind === 'audioinput').length > 0;
 
-                    var el = document.getElementById('audioInputAlt');
-                    el.parentNode.removeChild(el);
+                    if (hasMic) {
+                        var el = document.getElementById('audioInputAlt');
+                        el.parentNode.removeChild(el);
 
-                    document.getElementById('audioButton').onclick = onClickAudio;
+                        document.getElementById('audioButton').onclick = onClickAudio;
+                    } else {
+                        setAltAudio();
+                    }
 
                     resolve();
                 })
-                .catch(function(err) {
+                .catch(err => {
                     setAltAudio();
                     resolve();
                 });
