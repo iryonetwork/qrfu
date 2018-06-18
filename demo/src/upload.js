@@ -1,7 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
 import PropTypes from 'prop-types';
-var QRCode = require('qrcode.react');
+import QRCode from 'qrcode.react';
 
 const socket = io();
 

@@ -1,14 +1,10 @@
-import { createStore } from 'redux';
-import { combineForms } from 'react-redux-form';
+import { createStore, combineReducers } from 'redux';
+import {reducer as formReducer} from 'redux-form';
 
-const initialUser = {
-    name: '',
-    password: '',
-    avatar: '',
-};
+const reducers = {form: formReducer};
 
-const store = createStore(combineForms({
-    user: initialUser,
-}));
+const reducer = combineReducers(reducers);
+
+const store = createStore(reducer);
 
 export default store;

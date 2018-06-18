@@ -1,39 +1,39 @@
 import React from 'react';
-import { Control, Form, actions } from 'react-redux-form';
-import store from './store.js';
+import {Field, reduxForm} from 'redux-form';
 import Upload from './upload';
 import { ProfileImage } from './uploadlist';
 
-// react-redux-form example
-export default class ProfileForm extends React.Component {
+// redux-form example
+class ProfileForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleUpload = this.handleUpload.bind(this);
 	}
 
-	handleSubmit(user) {
-		alert(`{name: "${user.name}", password: "${user.password}", avatar: "${user.avatar}"}`);
-	}
-
 	handleUpload(files) {
-		store.dispatch(actions.change('user.avatar', files[0].url));
+		this.props.change('avatar', files[0].url);
 	}
 
 	render() {
+		const {handleSubmit} = this.props;
 		return (
-			<Form
-				model='user'
-				onSubmit={(user) => this.handleSubmit(user)}
-			>
+			<form onSubmit={handleSubmit}>
 				<label>Username:</label>
-				<Control.text model='user.name'/>
+				<Field name='username' component='input' type="text" />
 				<label>Password:</label>
-				<Control.text type='password' model='user.password' />
+				<Field name='password' component='input' type='password' />
 				<label>Profile Image:</label>
 				<p>Scan the QR code to upload a profile picture.</p>
 				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} onUpload={this.handleUpload} />
+				<Field name='avatar' component='input' type='text' />
 				<button type='submit'>Register</button>
-			</Form>
+			</form>
 		);
 	}
 }
+
+ProfileForm = reduxForm({
+	form: 'profile',
+}) (ProfileForm);
+
+export default ProfileForm;

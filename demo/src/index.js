@@ -8,12 +8,16 @@ import UploadList, { LinkList } from './uploadlist';
 import ProfileForm from './profile-form';
 
 function MyApp(props) {
+	const submit = values => {
+		window.alert (JSON.stringify (values));
+	  };
+	  
 	return (
 		<Provider store={ store }>
 			<div>
 				<h1>QR Upload Examples</h1>
 				<h2>1:1 ratio, images only, single file: (redux form)</h2>
-				<ProfileForm />
+				<ProfileForm onSubmit={submit}/>
 				<h2>Any ratio, any filetype, multiple files:</h2>
 				<Upload ratio={0} filetype='all' multiple={true} uploadlist={UploadList} />
 				<h2>6:9 ratio, images only, multiple files:</h2>
