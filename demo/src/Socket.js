@@ -8,8 +8,10 @@ export default class Socket {
     }
 
     join(uid, ratio, filetype, multiple) {
+        const self = this;
+
 		this.socket.on('connect', function() {
-			this.socket.emit('join', uid, ratio, filetype, multiple);
+			self.socket.emit('join', uid, ratio, filetype, multiple);
         });
         
         this.socket.emit('join', uid, ratio, filetype, multiple);

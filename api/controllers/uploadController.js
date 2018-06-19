@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const crypto = require('crypto');
 const fs = require('fs');
+const socket = require('../socket');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
         cb(null, newFilename);
     },
     fileFilter: function(req, file, cb) {
-        var type = clients[req.params.uid].filetype;
+        var type = socket.getFiletype(req.params.uid);
 
         if (type === 'all' || file.mimetype.startsWith(type)) {
             cb(null, true);
@@ -35,10 +36,11 @@ exports.fetch = function(req, res) {
 exports.upload = function(req, res, next) {
     const id = req.params.uid;
 
-    if (!clients[id]) {
+    if (!socket.isValid(id)) {
         res.status(500).send('no id');
     } else {
-        if (!clients[id].multiple) {
+        if (!socket.isMultiple(id)) {
+            // remove other files if user can only upload one file
             fs.readdir('./uploads', (error, files) => {
                 if (error) {
                     throw error;
@@ -61,7 +63,7 @@ exports.upload = function(req, res, next) {
                     type = 'audio';
                 }
 
-                clients[id].socket.emit('messages', {name: name, type: type, url: url, uid: id});
+                socket.send(id, name, type, url);
                 res.status(200).end();
             }
         });
@@ -71,13 +73,13 @@ exports.upload = function(req, res, next) {
 exports.info = function(req, res) {
     const id = req.params.uid;
 
-    if (!clients[id]) {
+    if (!socket.isValid(id)) {
         res.status(500).send('no id');
     } else {
         let uploadData = {
-            ratio: clients[id].ratio,
-            filetype: clients[id].filetype,
-            multiple: clients[id].multiple,
+            ratio: socket.getRatio(id),
+            filetype: socket.getFiletype(id),
+            multiple: socket.isMultiple(id),
         };
         res.json(uploadData);
     }
