@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadDisplay loads with QR code 1`] = `
+<div
+  className="code"
+>
+  <canvas
+    height={128}
+    style={
+      Object {
+        "height": 128,
+        "width": 128,
+      }
+    }
+    width={128}
+  />
+  <ul
+    className="custom"
+  />
+</div>
+`;
+
+exports[`UploadDisplay loads without QR code 1`] = `
+<div
+  className="code"
+>
+  <ul
+    className="custom"
+  />
+</div>
+`;

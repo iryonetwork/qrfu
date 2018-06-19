@@ -13,6 +13,10 @@ import UploadDisplay from './UploadDisplay';
  * 
  *   - uploadList is a component for displaying files - it needs to accept an uploads prop
  *     that is a list of objects with name, url, and type properties
+ * 
+ *   - socket is an object with the correct methods to access the server websocket
+ *   
+ *   - onUpload is a callback that is sent the uploads list every time the list changes
  */
 export default class Upload extends React.Component {
 	constructor(props) {
