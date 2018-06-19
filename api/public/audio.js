@@ -129,6 +129,8 @@ var onClickAudio = function(event) {
             document.getElementById('audioInput').className = 'fileHolder retake';
             document.getElementById('submit').disabled = false;
             document.getElementById('upload').onsubmit = onUploadAudio;
+
+            stream.getTracks().forEach(track => track.stop()); // turn off mic
         };
 
         recorder.start();

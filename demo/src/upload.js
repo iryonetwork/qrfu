@@ -16,7 +16,7 @@ import UploadDisplay from './UploadDisplay';
  * 
  *   - socket is an object with the correct methods to access the server websocket
  *   
- *   - onUpload is a callback that sends the uploads list every time it changes
+ *   - onUpload is a callback that is sent the uploads list every time the list changes
  */
 export default class Upload extends React.Component {
 	constructor(props) {

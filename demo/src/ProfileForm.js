@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import Upload from './Upload';
 import { ProfileImage } from './UploadList';
 import Socket from './Socket';
@@ -18,7 +18,7 @@ class ProfileForm extends React.Component {
 	}
 
 	render() {
-		const {handleSubmit} = this.props;
+		const { handleSubmit } = this.props;
 		const socket = new Socket();
 
 		return (
