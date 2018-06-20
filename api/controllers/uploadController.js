@@ -13,18 +13,24 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const newFilename = `${req.params.uid}-${file.originalname}`;
         cb(null, newFilename);
+    }
+});
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 100000,
     },
     fileFilter: function(req, file, cb) {
         var type = socket.getFiletype(req.params.uid);
 
-        if (type === 'all' || file.mimetype.startsWith(type)) {
+        if ((type === 'all' && (file.mimetype.startsWith('image') || file.mimetype.startsWith('audio')))
+                || file.mimetype.startsWith(type)) {
             cb(null, true);
         } else {
             cb(null, false);
         }
     }
-});
-const upload = multer({ storage }).single('file');
+}).single('file');
 
 exports.fetch = function(req, res) {
     const uid = crypto.randomBytes(16).toString('hex');
@@ -57,10 +63,12 @@ exports.upload = function(req, res, next) {
             } else {
                 const name = req.file.filename;
                 const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;
-                var type = 'image';
+                var type = 'none';
                 
                 if (req.file.mimetype.startsWith('audio')) {
                     type = 'audio';
+                } else if (req.file.mimetype.startsWith('image')) {
+                    type = 'image';
                 }
 
                 socket.send(id, name, type, url);

@@ -3,18 +3,10 @@ import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 
 export default class UploadDisplay extends React.Component {
-	constructor(props) {
-		super(props);
-		
-		this.state = {
-			isError: false
-        };
-	}
-
 	render() {
 		const isLoaded = this.props.uid !== '';
 
-		if (this.state.isError) {
+		if (this.props.isError) {
 			return (
 				<div className='code'>
 					Error. Please reload the page.
@@ -31,14 +23,11 @@ export default class UploadDisplay extends React.Component {
 			);
 		}
 	}
-
-	componentDidCatch(error, info) {
-		this.setState({isError: true});
-	}
 }
 
 UploadDisplay.propTypes = {
     url: PropTypes.string.isRequired,
     uid: PropTypes.string.isRequired,
     uploadlist: PropTypes.func.isRequired,
+    isError: PropTypes.bool.isRequired,
 }

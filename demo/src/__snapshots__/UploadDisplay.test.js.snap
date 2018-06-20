@@ -20,6 +20,14 @@ exports[`UploadDisplay loads with QR code 1`] = `
 </div>
 `;
 
+exports[`UploadDisplay loads with error 1`] = `
+<div
+  className="code"
+>
+  Error. Please reload the page.
+</div>
+`;
+
 exports[`UploadDisplay loads without QR code 1`] = `
 <div
   className="code"

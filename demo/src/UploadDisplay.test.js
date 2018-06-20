@@ -13,7 +13,8 @@ test('UploadDisplay loads with QR code', () => {
 				uid={uid}
 				url={url}
 				uploadlist={UploadList}
-				uploads={[]} />
+				uploads={[]}
+                isError={false} />
     );
 
     let tree = component.toJSON();
@@ -29,7 +30,25 @@ test('UploadDisplay loads without QR code', () => {
 				uid={uid}
 				url={url}
 				uploadlist={UploadList}
-				uploads={[]} />
+				uploads={[]} 
+                isError={false} />
+    );
+
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+});
+
+test('UploadDisplay loads with error', () => {
+    const url = '';
+    const uid = '';
+
+    const component = renderer.create(
+        <UploadDisplay
+				uid={uid}
+				url={url}
+				uploadlist={UploadList}
+				uploads={[]} 
+                isError={true} />
     );
 
     let tree = component.toJSON();

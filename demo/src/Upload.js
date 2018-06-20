@@ -26,6 +26,7 @@ export default class Upload extends React.Component {
 			url: '',
 			uid: '',
 			uploads: [],
+			isError: false,
         };
 
 		fetch('/api/fetch')
@@ -38,7 +39,14 @@ export default class Upload extends React.Component {
 	}
 
 	connect() {
-		this.props.socket.join(this.state.uid, this.props.ratio, this.props.filetype, this.props.multiple);
+		this.props.socket.join(
+			this.state.uid,
+			this.props.ratio,
+			this.props.filetype,
+			this.props.multiple,
+			this.onDisconnect.bind(this),
+			this.onReconnect.bind(this)
+		);
 		this.props.socket.receive(this.onUpload.bind(this));
 	}
 	
@@ -47,15 +55,33 @@ export default class Upload extends React.Component {
 			return;
 		}
 
+		if (this.props.filetype !== 'all') {
+			if (upload.type !== this.props.filetype) {
+				return;
+			}
+		}
+
 		const uploads = this.state.uploads.slice();
 		
 		if (!this.props.multiple) {
 			// only most recent upload exists
 			this.setState({uploads: [upload]});
-		} else if (!uploads.find(item => item.name === upload.name)) {
+		} else if (uploads.find(item => item.name === upload.name)) {
+			const fUploads = uploads.filter(item => item.name !== upload.name);
+			fUploads.push(upload);
+			this.setState({uploads: fUploads});
+		} else {
 			uploads.push(upload);
 			this.setState({uploads: uploads});
 		}
+	}
+
+	onDisconnect() {
+		this.setState({isError: true});
+	}
+
+	onReconnect() {
+		this.setState({isError: false});
 	}
 
 	render() {
@@ -64,7 +90,8 @@ export default class Upload extends React.Component {
 				uid={this.state.uid}
 				url={this.state.url}
 				uploadlist={this.props.uploadlist}
-				uploads={this.state.uploads} />
+				uploads={this.state.uploads}
+				isError={this.state.isError} />
 		)
 	}
 
@@ -76,6 +103,10 @@ export default class Upload extends React.Component {
 
 	componentWillUnmount() {
 		this.props.socket.disconnect();
+	}
+
+	componentDidCatch(error, info) {
+		this.setState({isError: true});
 	}
 }
 

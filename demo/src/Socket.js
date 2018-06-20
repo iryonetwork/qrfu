@@ -7,18 +7,20 @@ export default class Socket {
         }
     }
 
-    join(uid, ratio, filetype, multiple) {
+    join(uid, ratio, filetype, multiple, onDisconnect, onReconnect) {
         const self = this;
 
-		this.socket.on('connect', function() {
-			self.socket.emit('join', uid, ratio, filetype, multiple);
-        });
+		this.socket.on('connect', () => self.socket.emit('join', uid, ratio, filetype, multiple));
+
+        this.socket.on('disconnect', onDisconnect);
+    
+        this.socket.on('reconnect', onReconnect);
         
         this.socket.emit('join', uid, ratio, filetype, multiple);
     }
 
-    receive(func) {
-        this.socket.on('messages', func);
+    receive(callback) {
+        this.socket.on('messages', callback);
     }
 
     disconnect() {
