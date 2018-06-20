@@ -35,6 +35,9 @@ export default class Upload extends React.Component {
 				this.setState({url: data.url});
 				this.setState({uid: data.uid});
 				this.connect();
+			})
+			.catch(error => {
+				this.setState({isError: true});
 			});
 	}
 
@@ -67,9 +70,9 @@ export default class Upload extends React.Component {
 			// only most recent upload exists
 			this.setState({uploads: [upload]});
 		} else if (uploads.find(item => item.name === upload.name)) {
-			const fUploads = uploads.filter(item => item.name !== upload.name);
-			fUploads.push(upload);
-			this.setState({uploads: fUploads});
+			const filterUploads = uploads.filter(item => item.name !== upload.name);
+			filterUploads.push(upload);
+			this.setState({uploads: filterUploads});
 		} else {
 			uploads.push(upload);
 			this.setState({uploads: uploads});

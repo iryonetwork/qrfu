@@ -2,26 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 
-export default class UploadDisplay extends React.Component {
-	render() {
-		const isLoaded = this.props.uid !== '';
+export default function UploadDisplay(props) {
+	const isLoaded = props.uid !== '';
 
-		if (this.props.isError) {
-			return (
-				<div className='code'>
-					Error. Please reload the page.
-				</div>
-			);
-		} else {
-			return (
-				<div className='code'>
-					{isLoaded && 
-						<QRCode value={`http://${this.props.url}/ui/${this.props.uid}`} />
-					}
-					<this.props.uploadlist uploads={this.props.uploads} />
-				</div>
-			);
-		}
+	if (props.isError) {
+		return (
+			<div className='code'>
+				Error. Please reload the page.
+			</div>
+		);
+	} else {
+		return (
+			<div className='code'>
+				{isLoaded && 
+					<QRCode value={`http://${props.url}/ui/${props.uid}`} />
+				}
+				<props.uploadlist uploads={props.uploads} />
+			</div>
+		);
 	}
 }
 
@@ -30,4 +28,4 @@ UploadDisplay.propTypes = {
     uid: PropTypes.string.isRequired,
     uploadlist: PropTypes.func.isRequired,
     isError: PropTypes.bool.isRequired,
-}
+};

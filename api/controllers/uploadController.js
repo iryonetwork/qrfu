@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 100000,
+        fileSize: 100000000,
     },
     fileFilter: function(req, file, cb) {
         var type = socket.getFiletype(req.params.uid);
@@ -51,30 +51,15 @@ exports.upload = function(req, res, next) {
                 if (error) {
                     throw error;
                 }
-            
+                
                 files.filter(name => name.startsWith(id))
                     .forEach(data => fs.unlink(`./uploads/${data}`, (er) => {console.log(er)}));
+
+                uploadFile(id, req, res, next);
             });
+        } else {
+            uploadFile(id, req, res, next);
         }
-
-        upload(req, res, function(err) {
-            if (err) {
-                next(err);
-            } else {
-                const name = req.file.filename;
-                const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;
-                var type = 'none';
-                
-                if (req.file.mimetype.startsWith('audio')) {
-                    type = 'audio';
-                } else if (req.file.mimetype.startsWith('image')) {
-                    type = 'image';
-                }
-
-                socket.send(id, name, type, url);
-                res.status(200).end();
-            }
-        });
     }
 };
 
@@ -101,3 +86,24 @@ exports.download = function(req, res) {
 exports.mobile = function(req, res) {
     res.sendFile('upload.html', {root: './public'});
 };
+
+var uploadFile = function (id, req, res, next) {
+    upload(req, res, function(err) {
+        if (err) {
+            next(err);
+        } else {
+            const name = req.file.filename;
+            const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;
+            var type = 'none';
+            
+            if (req.file.mimetype.startsWith('audio')) {
+                type = 'audio';
+            } else if (req.file.mimetype.startsWith('image')) {
+                type = 'image';
+            }
+
+            socket.send(id, name, type, url);
+            res.status(200).end();
+        }
+    });
+}

@@ -101,7 +101,7 @@ describe('Testing with multiple=false', () => {
 
 });
 
-describe('Testing file name clash', () => {
+describe('Testing file name check', () => {
 
     beforeEach(() => {
         const files = [
@@ -133,7 +133,7 @@ describe('Testing file name clash', () => {
         );
     });
 
-    test('Upload should overwrite second file', async () => {
+    test('Upload should overwrite first file', async () => {
         wrapper.update();
         expect(socket.receive.mock.calls.length).toEqual(1);
         expect(wrapper.state().uploads.length).toEqual(1);
@@ -142,7 +142,7 @@ describe('Testing file name clash', () => {
 
 });
 
-describe('Testing file type clash', () => {
+describe('Testing file type check', () => {
 
     beforeEach(() => {
         const files = [
@@ -153,10 +153,10 @@ describe('Testing file type clash', () => {
                 type: 'audio',
             },
             {
-                name: 'file-aud-2',
+                name: 'file-2',
                 url: 'http://localhost:3001/',
                 uid: '123',
-                type: 'audio',
+                type: 'none',
             }
         ];
 

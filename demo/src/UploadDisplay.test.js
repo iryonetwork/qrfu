@@ -30,7 +30,7 @@ test('UploadDisplay loads without QR code', () => {
 				uid={uid}
 				url={url}
 				uploadlist={UploadList}
-				uploads={[]} 
+				uploads={[]}
                 isError={false} />
     );
 
