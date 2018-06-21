@@ -1,3 +1,5 @@
+var audioBlob;
+
 // audio setup - check if using default or alternate audio
 
 var setupAudio = function() {
@@ -47,21 +49,29 @@ var setAltAudio = function() {
 
 var onUploadAudio = function(event) {
     event.preventDefault();
-    
-    var data = document.getElementById('audioPreview').src;
 
     document.documentElement.style.background = '#0296e6';
     document.getElementById('submit').disabled = true;
-    document.getElementById('audioPreview').src = '';
     document.getElementById('audioContainer').style.display = 'none';
     document.getElementById('audioInput').style.display = 'none';
     document.getElementById('audioInput').className = 'fileHolder';
-    document.getElementById('spinner').style.display = 'block';
+
+    if (audioBlob) {
+        document.getElementById('spinner').style.display = 'block';
+    } else {
+        document.getElementById('message').innerText = 'Failed to upload, please try again.';
+        document.getElementById('message').style.display = 'block';
+    }
+
+    var data = document.getElementById('audioPreview').src;
+    document.getElementById('audioPreview').src = '';
     
     var form = new FormData();
 
-    form.append('file', window.blob, (new Date()).getTime() + ".ogg");
+    form.append('file', audioBlob, (new Date()).getTime() + ".ogg");
     sendFile(form);
+
+    audioBlob = null;
 };
 
 var onClickAudio = function(event) {
@@ -120,7 +130,7 @@ var onClickAudio = function(event) {
             var url = window.URL.createObjectURL(blob);
             chunks = [];
 
-            window.blob = blob;
+            audioBlob = blob;
 
             document.getElementById('audioContainer').style.display = 'flex';
             document.getElementById('audioPreview').src = url;

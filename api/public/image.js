@@ -34,62 +34,11 @@ var onSubmitImage = function(event) {
             image.style.height = '';
             image.className = '';
 
-            var configImage = function() {
-                EXIF.getData(document.getElementById('preview'), function() {
-                    document.getElementById('spinner').style.display = 'none';
-
-                    var orientation = EXIF.getTag(this, 'Orientation');
-                    var height = document.getElementById('imgContainer').clientHeight;
-                    var width = window.innerWidth;
-                    var imageHeight;
-                    
-                    if (orientation == 6) {
-                        image.className = 'rotate90';
-                        imageHeight = image.clientWidth;
-                    } else if(orientation == 8) {
-                        image.className = 'rotate270';
-                        imageHeight = image.clientWidth;
-                    } else if(orientation == 3) {
-                        image.className = 'rotate180';
-                    }
-
-                    // rotated images need to be resized to fit screen
-                    if (imageHeight) {
-                        if (imageHeight > height) {
-                            image.style.maxWidth = height + 'px';
-                        }
-                        if (image.clientHeight >= width) {
-                            image.style.maxHeight = (width - 20) + 'px';
-                        }
-                    } else {
-                        if (image.clientHeight > height) {
-                            image.style.maxHeight = height + 'px';
-                        }
-                        if (image.clientWidth >= width) {
-                            image.style.maxWidth = (width - 20) + 'px';
-                        }
-                    }
-
-                    let cropperArgs = {
-                        initialAspectRatio: NaN,
-                        viewMode: 2,
-                        ready: function(event) {
-                            document.getElementById('imgContainer').style.opacity = 1;
-                        }
-                    };
-
-                    if (settings.ratio) {
-                        cropperArgs.aspectRatio = settings.ratio;
-                    }
-
-                    cropper = new Cropper(image, cropperArgs);
-                });
-
+            image.addEventListener('load', function() {
+                EXIF.getData(document.getElementById('preview'), exifCallback.bind(this, image));
                 // only run the listener once
                 this.removeEventListener('load', arguments.callee);
-            }
-
-            image.addEventListener('load', configImage);
+            });
         };
 
         reader.readAsDataURL(document.getElementById('file').files[0]);
@@ -132,4 +81,54 @@ var onUploadImage = function(event) {
         form.append('file', files[0], files[0].name);
         sendFile(form);
     }
+};
+
+var exifCallback = function(image) {
+    document.getElementById('spinner').style.display = 'none';
+
+    var orientation = EXIF.getTag(this, 'Orientation');
+    var height = document.getElementById('imgContainer').clientHeight;
+    var width = window.innerWidth;
+    var imageHeight;
+    
+    if (orientation == 6) {
+        image.className = 'rotate90';
+        imageHeight = image.clientWidth;
+    } else if(orientation == 8) {
+        image.className = 'rotate270';
+        imageHeight = image.clientWidth;
+    } else if(orientation == 3) {
+        image.className = 'rotate180';
+    }
+
+    // rotated images need to be resized to fit screen
+    if (imageHeight) {
+        if (imageHeight > height) {
+            image.style.maxWidth = height + 'px';
+        }
+        if (image.clientHeight >= width) {
+            image.style.maxHeight = (width - 20) + 'px';
+        }
+    } else {
+        if (image.clientHeight > height) {
+            image.style.maxHeight = height + 'px';
+        }
+        if (image.clientWidth >= width) {
+            image.style.maxWidth = (width - 20) + 'px';
+        }
+    }
+
+    let cropperArgs = {
+        initialAspectRatio: NaN,
+        viewMode: 2,
+        ready: function(event) {
+            document.getElementById('imgContainer').style.opacity = 1;
+        }
+    };
+
+    if (settings.ratio) {
+        cropperArgs.aspectRatio = settings.ratio;
+    }
+
+    cropper = new Cropper(image, cropperArgs);
 };
