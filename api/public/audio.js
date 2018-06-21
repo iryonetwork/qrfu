@@ -84,22 +84,22 @@ var onClickAudio = function(event) {
 
     var count = 0;
 
-    var timer = window.setInterval(() => {
-        count++;
-        
-        var min = Math.floor(count / 60);
-        var sec = count - (min * 60);
-
-        if (sec < 10) {
-            sec = "0" + sec;
-        }
-
-        document.getElementById('timer').innerText = `${min}:${sec}`;
-    }, 1000);
-
     var onSuccess = function(stream) {
         var recorder = new MediaRecorder(stream);
         var chunks = [];
+
+        var timer = window.setInterval(() => {
+            count++;
+            
+            var min = Math.floor(count / 60);
+            var sec = count - (min * 60);
+
+            if (sec < 10) {
+                sec = "0" + sec;
+            }
+
+            document.getElementById('timer').innerText = `${min}:${sec}`;
+        }, 1000);
 
         document.getElementById('stopButton').onclick = function(e) {
             document.getElementById('audioControls').style.display = 'none';

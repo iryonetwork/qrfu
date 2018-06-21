@@ -80,7 +80,11 @@ exports.info = function(req, res) {
 
 exports.download = function(req, res) {
     const name = req.params.name;
-    res.sendFile(`${name}`, {root: './uploads'}, (err) => res.sendStatus(404));
+    res.sendFile(`${name}`, {root: './uploads'}, (err) => {
+        if (err) {
+            res.sendStatus(404);
+        }
+    });
 };
 
 exports.mobile = function(req, res) {
