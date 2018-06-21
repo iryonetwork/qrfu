@@ -15,7 +15,7 @@ app.use('/scripts', express.static(__dirname + '/node_modules/cropperjs/dist'));
 var routes = require('./routes/routes');
 routes(app);
 
-io.on('connection', socket.addClient);
+io.on('connection', socket.setupClient);
 
 http.listen(port, '0.0.0.0');
 

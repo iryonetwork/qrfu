@@ -22,7 +22,7 @@ describe('/GET api information', () => {
     });
 
     it('it should GET uid metadata', (done) => {
-        socket.addId('222', 1, 'image', true, {send: () => {}});
+        socket.addClient('222', 1, 'image', true, {send: () => {}});
 
         chai.request(app)
             .get(`/api/info/222`)
@@ -49,7 +49,7 @@ describe('/GET api information', () => {
 
 describe('/POST file to upload', () => {
     it('it should POST a file', (done) => {
-        socket.addId('222', 1, 'image', true, {emit: () => {}});
+        socket.addClient('222', 1, 'image', true, {emit: () => {}});
 
         chai.request(app)
             .post('/api/upload/222')

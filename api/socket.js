@@ -1,19 +1,10 @@
 const clients = {};
 
 const socket = {
-    addClient: client => {
+    setupClient: client => {
         client.on('join', function(id, ratio, filetype, multiple) {
             console.log(`${id} joined`);
-
-            const data = {
-                uid: id,
-                ratio: ratio,
-                filetype: filetype,
-                multiple: multiple,
-                socket: client,
-            };
-
-            clients[id] = data;
+            socket.addClient(id, ratio, filetype, multiple, client);
         });
 
         client.on('disconnect', function () {
@@ -33,9 +24,7 @@ const socket = {
     getFiletype: id => clients[id].filetype,
     getRatio: id => clients[id].ratio,
     isMultiple: id => clients[id].multiple,
-
-    // for testing
-    addId: (id, ratio, type, multiple, socket) =>
+    addClient: (id, ratio, type, multiple, socket) =>
         clients[id] = {uid: id, ratio: ratio, filetype: type, multiple: multiple, socket: socket},
 }
 
