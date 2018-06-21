@@ -15,8 +15,10 @@ app.use('/scripts', express.static(__dirname + '/node_modules/cropperjs/dist'));
 var routes = require('./routes/routes');
 routes(app);
 
-socket.start(io);
+io.on('connection', socket.addClient);
 
 http.listen(port, '0.0.0.0');
 
 console.log('api server started on: ' + port);
+
+module.exports = app; // for testing
