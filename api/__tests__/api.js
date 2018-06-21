@@ -13,10 +13,9 @@ describe('/GET api information', () => {
         chai.request(app)
             .get('/api/fetch')
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.uid.should.be.a('string');
-                res.body.url.should.be.a('string');
+                expect(res.statusCode).toBe(200);
+                expect(res.body).toHaveProperty('uid');
+                expect(res.body).toHaveProperty('url');
                 done();
             });
     });
@@ -27,11 +26,10 @@ describe('/GET api information', () => {
         chai.request(app)
             .get(`/api/info/222`)
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.ratio.should.equal(1);
-                res.body.filetype.should.equal('image');
-                res.body.multiple.should.equal(true);
+                expect(res.statusCode).toBe(200);
+                expect(res.body.ratio).toBe(1);
+                expect(res.body.filetype).toBe('image');
+                expect(res.body.multiple).toBe(true);
                 done();
             });
     });
@@ -40,8 +38,8 @@ describe('/GET api information', () => {
         chai.request(app)
             .get('/api/info/111')
             .end((err, res) => {
-                res.should.have.status(500);
-                res.text.should.equal('no id');
+                expect(res.statusCode).toBe(500);
+                expect(res.text).toBe('no id');
                 done();
             });
     });
@@ -53,9 +51,9 @@ describe('/POST file to upload', () => {
 
         chai.request(app)
             .post('/api/upload/222')
-            .attach('file', './test/test.png', 'test.png')
+            .attach('file', './__tests__/test.png', 'test.png')
             .then((res) => {
-                res.should.have.status(200);
+                expect(res.statusCode).toBe(200);
                 done();
             });
     });
@@ -63,10 +61,10 @@ describe('/POST file to upload', () => {
     it('it should fail to POST a file', (done) => {
         chai.request(app)
             .post('/api/upload/111')
-            .attach('file', './test/test.png', 'test.png')
+            .attach('file', './__tests__/test.png', 'test.png')
             .then((res) => {
-                res.should.have.status(500);
-                res.text.should.equal('no id');
+                expect(res.statusCode).toBe(500);
+                expect(res.text).toBe('no id');
                 done();
             });
     });
