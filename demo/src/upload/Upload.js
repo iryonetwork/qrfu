@@ -75,6 +75,7 @@ export default class Upload extends React.Component {
 		if (!this.props.multiple) {
 			// only most recent upload exists
 			this.setState({uploads: [upload]});
+			this.setState({mobileConnection: false});
 		} else if (uploads.find(item => item.name === upload.name)) {
 			const filterUploads = uploads.filter(item => item.name !== upload.name);
 			filterUploads.push(upload);

@@ -9,7 +9,7 @@ export default function UploadDisplay(props) {
 		return (
 			<div className='code'>
 				<div className="connected">
-					<img src="/error.png" alt="disconnected" />
+					<img src="/error.png" alt="error" />
 					<p>Disconnected</p>
 				</div>
 			</div>
@@ -22,7 +22,7 @@ export default function UploadDisplay(props) {
 				}
 				{isLoaded && props.connection && 
 					<div className="connected">
-						<img src="/success.png" alt="connected" />
+						<img src="/success.png" alt="success" />
 						<p>Connected</p>
 					</div>
 				}

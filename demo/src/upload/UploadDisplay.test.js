@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 import UploadDisplay from './UploadDisplay';
-import UploadList from './UploadList';
+import UploadList from '../UploadList';
 
 test('UploadDisplay loads with QR code', () => {
     const url = '127.0.0.1:3000/ui/123';

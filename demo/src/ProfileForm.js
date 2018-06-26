@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Upload from './Upload';
+import Upload from './upload/Upload';
 import { ProfileImage } from './UploadList';
-import Socket from './Socket';
+import Socket from './upload/Socket';
 
 // redux-form example
 class ProfileForm extends React.Component {

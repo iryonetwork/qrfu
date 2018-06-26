@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store.js';
 import './index.css';
-import Upload from './Upload';
+import Upload from './upload/Upload';
 import UploadList, { LinkList } from './UploadList';
 import ProfileForm from './ProfileForm';
-import Socket from './Socket';
+import Socket from './upload/Socket';
 
 function MyApp(props) {
 	const submit = values => {
