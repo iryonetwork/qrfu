@@ -27,6 +27,7 @@ export default class Upload extends React.Component {
 			uid: '',
 			uploads: [],
 			isError: false,
+			mobileConnection: false,
         };
 
 		fetch('/api/fetch')
@@ -55,6 +56,11 @@ export default class Upload extends React.Component {
 	
 	onUpload(upload) {
 		if (upload.uid !== this.state.uid) {
+			return;
+		}
+
+		if (upload.connected) {
+			this.setState({mobileConnection: true});
 			return;
 		}
 
@@ -94,7 +100,8 @@ export default class Upload extends React.Component {
 				url={this.state.url}
 				uploadlist={this.props.uploadlist}
 				uploads={this.state.uploads}
-				isError={this.state.isError} />
+				isError={this.state.isError}
+				connection={this.state.mobileConnection} />
 		)
 	}
 

@@ -51,6 +51,21 @@ form > .code {
 	padding: 0;
 }
 
+.connected {
+	width: 128px;
+	height: 118px;
+	padding-top: 10px;
+    display: inline-block;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.connected > p {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0.5em;
+}
+
 ul.custom {
 	list-style-type: none;
 }

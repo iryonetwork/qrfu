@@ -74,6 +74,7 @@ exports.info = function(req, res) {
             multiple: socket.isMultiple(id),
         };
         res.json(uploadData);
+        socket.notifyConnected(id);
     }
 };
 

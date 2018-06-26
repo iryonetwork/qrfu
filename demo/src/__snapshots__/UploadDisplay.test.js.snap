@@ -24,7 +24,17 @@ exports[`UploadDisplay loads with error 1`] = `
 <div
   className="code"
 >
-  Error. Please reload the page.
+  <div
+    className="connected"
+  >
+    <img
+      alt="disconnected"
+      src="/error.png"
+    />
+    <p>
+      Disconnected
+    </p>
+  </div>
 </div>
 `;
 
