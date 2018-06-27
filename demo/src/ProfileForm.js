@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Upload from './upload/Upload';
 import { ProfileImage } from './UploadList';
-import Socket from './upload/Socket';
 
 // redux-form example
 class ProfileForm extends React.Component {
@@ -19,7 +18,6 @@ class ProfileForm extends React.Component {
 
 	render() {
 		const { handleSubmit } = this.props;
-		const socket = new Socket();
 
 		return (
 			<form onSubmit={handleSubmit}>
@@ -29,7 +27,7 @@ class ProfileForm extends React.Component {
 				<Field name='password' component='input' type='password' />
 				<label>Profile Image:</label>
 				<p>Scan the QR code to upload a profile picture.</p>
-				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} socket={socket} onChange={this.handleUpload} />
+				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} onChange={this.handleUpload} />
 				<Field name='avatar' component='input' type='hidden' />
 				<button type='submit'>Register</button>
 			</form>

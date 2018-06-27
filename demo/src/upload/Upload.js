@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UploadDisplay from './UploadDisplay';
+import Socket from './Socket';
+
+const socket = new Socket();
 
 /**
  * Props of Upload component:
@@ -148,4 +151,8 @@ Upload.propTypes = {
     uploadlist: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
     socket: PropTypes.object.isRequired,
     onChange: PropTypes.func,
+}
+
+Upload.defaultProps = {
+	socket: socket,
 }

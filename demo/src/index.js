@@ -6,14 +6,11 @@ import './index.css';
 import Upload from './upload/Upload';
 import UploadList, { LinkList } from './UploadList';
 import ProfileForm from './ProfileForm';
-import Socket from './upload/Socket';
 
 function MyApp(props) {
 	const submit = values => {
 		window.alert (JSON.stringify (values));
 	};
-
-	const socket = new Socket();
 	  
 	return (
 		<Provider store={ store }>
@@ -22,11 +19,11 @@ function MyApp(props) {
 				<h2>1:1 ratio, images only, single file: (redux form)</h2>
 				<ProfileForm onSubmit={submit}/>
 				<h2>Any ratio, any filetype, multiple files:</h2>
-				<Upload ratio={0} filetype='all' multiple={true} uploadlist={UploadList} socket={socket} />
+				<Upload ratio={0} filetype='all' multiple={true} uploadlist={UploadList} />
 				<h2>6:9 ratio, images only, multiple files:</h2>
-				<Upload ratio={6/9} filetype='image' multiple={true} uploadlist={LinkList} socket={socket} />
+				<Upload ratio={6/9} filetype='image' multiple={true} uploadlist={LinkList} />
 				<h2>Audio only, multiple files:</h2>
-				<Upload ratio={0} filetype='audio' multiple={true} uploadlist={UploadList} socket={socket} />
+				<Upload ratio={0} filetype='audio' multiple={true} uploadlist={UploadList} />
 			</div>
 		</Provider>
 	);
