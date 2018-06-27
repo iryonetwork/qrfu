@@ -52,7 +52,11 @@ exports.upload = function(req, res, next) {
                 }
                 
                 files.filter(name => name.startsWith(id))
-                    .forEach(data => fs.unlink(`./uploads/${data}`, (er) => {console.log(er)}));
+                    .forEach(data => fs.unlink(`./uploads/${data}`, (err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    }));
 
                 uploadFile(id, req, res, next);
             });
@@ -83,6 +87,18 @@ exports.download = function(req, res) {
     res.sendFile(`${name}`, {root: './uploads'}, (err) => {
         if (err) {
             res.sendStatus(404);
+        }
+    });
+};
+
+exports.delete = function(req, res) {
+    const name = req.params.name;
+    
+    fs.unlink(`./uploads/${name}`, (err) => {
+        if (err) {
+            res.status(500).end();
+        } else {
+            res.status(200).end();
         }
     });
 };

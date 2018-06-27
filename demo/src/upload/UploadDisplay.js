@@ -26,7 +26,7 @@ export default function UploadDisplay(props) {
 						<p>Connected</p>
 					</div>
 				}
-				<props.uploadlist uploads={props.uploads} />
+				<props.uploadlist uploads={props.uploads} delete={props.delete} />
 			</div>
 		);
 	}
@@ -35,6 +35,7 @@ export default function UploadDisplay(props) {
 UploadDisplay.propTypes = {
     url: PropTypes.string.isRequired,
     uid: PropTypes.string.isRequired,
-    uploadlist: PropTypes.func.isRequired,
+    uploadlist: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+    delete: PropTypes.func,
     isError: PropTypes.bool.isRequired,
 };

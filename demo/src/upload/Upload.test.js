@@ -9,7 +9,7 @@ enzyme.configure({ adapter: new Adapter() });
 let wrapper, socket;
 
 beforeEach(() => {
-    jest.mock('./UploadList', () => () => <ul></ul>);
+    jest.mock('../UploadList', () => () => <ul></ul>);
     jest.mock('./UploadDisplay', () => 'UploadDisplay');
         
     const fetchData = {json: function() {

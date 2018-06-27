@@ -15,6 +15,9 @@ module.exports = function(app) {
     app.route('/api/file/:name')
         .get(upload.download);
     
+    app.route('/api/file/:name')
+        .delete(upload.delete);
+    
     app.route('/ui/:uid')
         .get(upload.mobile);
 }

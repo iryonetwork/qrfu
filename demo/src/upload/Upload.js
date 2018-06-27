@@ -16,7 +16,7 @@ import UploadDisplay from './UploadDisplay';
  * 
  *   - socket is an object with the correct methods to access the server websocket
  *   
- *   - onUpload is a callback that is sent the uploads list every time the list changes
+ *   - onChange is a callback that is sent the uploads list every time the list changes
  */
 export default class Upload extends React.Component {
 	constructor(props) {
@@ -29,6 +29,8 @@ export default class Upload extends React.Component {
 			isError: false,
 			mobileConnection: false,
         };
+
+		this.delete = this.delete.bind(this);
 
 		fetch('/api/fetch')
 			.then(results => results.json())
@@ -86,6 +88,23 @@ export default class Upload extends React.Component {
 		}
 	}
 
+	delete(fileName) {
+		fetch(`/api/file/${fileName}`, {method: 'DELETE'})
+			.then(data => {
+				if (data.status === 200) {
+					this.setState({mobileConnection: false});
+
+					const uploads = this.state.uploads.slice();
+					this.setState({uploads: uploads.filter(item => item.name !== fileName)});
+				} else {
+					this.setState({isError: true});
+				}
+			})
+			.catch(error => {
+				this.setState({isError: true});
+			});
+	}
+
 	onDisconnect() {
 		this.setState({isError: true});
 	}
@@ -101,14 +120,15 @@ export default class Upload extends React.Component {
 				url={this.state.url}
 				uploadlist={this.props.uploadlist}
 				uploads={this.state.uploads}
+				delete={this.delete}
 				isError={this.state.isError}
 				connection={this.state.mobileConnection} />
 		)
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
-		if (this.props.onUpload) {
-			this.props.onUpload(this.state.uploads);
+		if (this.props.onChange) {
+			this.props.onChange(this.state.uploads);
 		}
 	}
 
@@ -125,7 +145,7 @@ Upload.propTypes = {
     ratio: PropTypes.number,
     filetype: PropTypes.string.isRequired,
     multiple: PropTypes.bool.isRequired,
-    uploadlist: PropTypes.func.isRequired,
+    uploadlist: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
     socket: PropTypes.object.isRequired,
-    onUpload: PropTypes.func,
+    onChange: PropTypes.func,
 }

@@ -9,6 +9,10 @@ export default function UploadList(props) {
             return (<li key={file.name}>
                         <audio src={`${file.url}`} controls></audio>
                         <div>{file.name}</div>
+
+                        {props.delete &&
+                            <button type="button" onClick={() => props.delete(file.name)}>Delete</button>
+                        }
                     </li>);
         } else {
             return (<li key={file.name}>
@@ -16,13 +20,29 @@ export default function UploadList(props) {
                             <img src={`${file.url}`} alt='preview' />
                             <div>{file.name}</div>
                         </a>
+
+                        {props.delete && 
+                            <button type="button" onClick={() => props.delete(file.name)}>Delete</button>
+                        }
                     </li>);
         }
     });
     
-	return (
-		<ul className='custom'>{items}</ul>
-	);
+    if (props.uploads.length > 1 && props.delete) {
+        return (
+            <div>
+                <button type="button" onClick={() => {props.uploads.forEach(f => props.delete(f.name))}}>
+                    Delete All
+                </button>
+
+                <ul className='custom'>{items}</ul>
+            </div>
+        );
+    } else {
+        return (
+            <ul className='custom'>{items}</ul>
+        );
+    }
 }
 
 export function LinkList(props) {
@@ -31,18 +51,39 @@ export function LinkList(props) {
             <a href={`${file.url}`}>
                 {file.name}
             </a>
+            {props.delete &&
+                <button type="button" onClick={() => props.delete(file.name)}>Delete</button>
+            }
         </li>)
     );
     
-	return (
-		<ul>{items}</ul>
-	);
+    if (props.uploads.length > 1 && props.delete) {
+        return (
+            <div>
+                <button type="button" onClick={() => {props.uploads.forEach(f => props.delete(f.name))}}>
+                    Delete All
+                </button>
+
+                <ul>{items}</ul>
+            </div>
+        );
+    } else {
+        return (
+            <ul>{items}</ul>
+        );
+    }
 }
 
 export function ProfileImage(props) {
     if (props.uploads.length > 0) {
         return (
-            <img className='profilePic' src={`${props.uploads[0].url}`} alt='avatar' />
+            <span>
+                <img className='profilePic' src={`${props.uploads[0].url}`} alt='avatar' />
+
+                {props.delete && 
+                    <button type="button" onClick={() => props.delete(props.uploads[0].name)}>Delete</button>
+                }
+            </span>
         );
     } else {
         return (
@@ -59,5 +100,6 @@ UploadList.propTypes = LinkList.propTypes = ProfileImage.propTypes = {
             uid: PropTypes.string,
             type: PropTypes.string,
         })
-    ).isRequired
+    ).isRequired,
+    delete: PropTypes.func,
 };

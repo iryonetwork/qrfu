@@ -49,11 +49,13 @@ exports[`List displays uploads in their specific formats 1`] = `
 `;
 
 exports[`Profile image displays first file 1`] = `
-<img
-  alt="avatar"
-  className="profilePic"
-  src="http://localhost:3001/"
-/>
+<span>
+  <img
+    alt="avatar"
+    className="profilePic"
+    src="http://localhost:3001/"
+  />
+</span>
 `;
 
 exports[`Profile image is set to default empty tag 1`] = `

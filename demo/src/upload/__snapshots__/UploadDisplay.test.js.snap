@@ -28,7 +28,7 @@ exports[`UploadDisplay loads with error 1`] = `
     className="connected"
   >
     <img
-      alt="disconnected"
+      alt="error"
       src="/error.png"
     />
     <p>

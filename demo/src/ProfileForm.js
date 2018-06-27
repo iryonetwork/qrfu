@@ -29,7 +29,7 @@ class ProfileForm extends React.Component {
 				<Field name='password' component='input' type='password' />
 				<label>Profile Image:</label>
 				<p>Scan the QR code to upload a profile picture.</p>
-				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} socket={socket} onUpload={this.handleUpload} />
+				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} socket={socket} onChange={this.handleUpload} />
 				<Field name='avatar' component='input' type='hidden' />
 				<button type='submit'>Register</button>
 			</form>
