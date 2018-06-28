@@ -20,6 +20,27 @@ exports[`UploadDisplay loads with QR code 1`] = `
 </div>
 `;
 
+exports[`UploadDisplay loads with connected text 1`] = `
+<div
+  className="code"
+>
+  <div
+    className="connected"
+  >
+    <img
+      alt="success"
+      src="link.png"
+    />
+    <p>
+      Connected
+    </p>
+  </div>
+  <ul
+    className="custom"
+  />
+</div>
+`;
+
 exports[`UploadDisplay loads with error 1`] = `
 <div
   className="code"
@@ -29,7 +50,7 @@ exports[`UploadDisplay loads with error 1`] = `
   >
     <img
       alt="error"
-      src="/error.png"
+      src="error.png"
     />
     <p>
       Disconnected

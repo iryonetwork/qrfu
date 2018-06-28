@@ -14,7 +14,8 @@ test('UploadDisplay loads with QR code', () => {
 				url={url}
 				uploadlist={UploadList}
 				uploads={[]}
-                isError={false} />
+                isError={false}
+                connection={false} />
     );
 
     let tree = component.toJSON();
@@ -31,7 +32,8 @@ test('UploadDisplay loads without QR code', () => {
 				url={url}
 				uploadlist={UploadList}
 				uploads={[]}
-                isError={false} />
+                isError={false}
+                connection={false} />
     );
 
     let tree = component.toJSON();
@@ -48,7 +50,26 @@ test('UploadDisplay loads with error', () => {
 				url={url}
 				uploadlist={UploadList}
 				uploads={[]} 
-                isError={true} />
+                isError={true}
+                connection={false} />
+    );
+
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+});
+
+test('UploadDisplay loads with connected text', () => {
+    const url = '127.0.0.1:3000/ui/123';
+    const uid = '123';
+
+    const component = renderer.create(
+        <UploadDisplay
+				uid={uid}
+				url={url}
+				uploadlist={UploadList}
+				uploads={[]} 
+                isError={false}
+                connection={true} />
     );
 
     let tree = component.toJSON();

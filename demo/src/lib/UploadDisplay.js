@@ -37,7 +37,16 @@ export default function UploadDisplay(props) {
 UploadDisplay.propTypes = {
     url: PropTypes.string.isRequired,
     uid: PropTypes.string.isRequired,
-    uploadlist: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+	uploadlist: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+	uploads: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired,
+            uid: PropTypes.string,
+            type: PropTypes.string,
+        })
+    ).isRequired,
     delete: PropTypes.func,
-    isError: PropTypes.bool.isRequired,
+	isError: PropTypes.bool.isRequired,
+	connection: PropTypes.bool,
 };
