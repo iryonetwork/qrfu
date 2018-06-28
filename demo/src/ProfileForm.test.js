@@ -7,7 +7,7 @@ import ProfileForm from './ProfileForm';
 
 enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('./upload/Upload', () => () => <div id="upload"></div>);
+jest.mock('./lib/Upload', () => () => <div id="upload"></div>);
 
 let wrapper;
 

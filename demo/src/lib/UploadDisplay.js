@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
+import linkImage from './assets/link.png';
+import errorImage from './assets/error.png';
 
 export default function UploadDisplay(props) {
 	const isLoaded = props.uid !== '';
@@ -9,7 +11,7 @@ export default function UploadDisplay(props) {
 		return (
 			<div className='code'>
 				<div className="connected">
-					<img src="/error.png" alt="error" />
+					<img src={errorImage} alt="error" />
 					<p>Disconnected</p>
 				</div>
 			</div>
@@ -22,7 +24,7 @@ export default function UploadDisplay(props) {
 				}
 				{isLoaded && props.connection && 
 					<div className="connected">
-						<img src="/success.png" alt="success" />
+						<img src={linkImage} alt="success" />
 						<p>Connected</p>
 					</div>
 				}

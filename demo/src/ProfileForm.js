@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Upload from './upload/Upload';
+import Upload from './lib/Upload';
 import { ProfileImage } from './UploadList';
 
 // redux-form example

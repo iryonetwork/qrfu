@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store.js';
 import './index.css';
-import Upload from './upload/Upload';
+import Upload from './lib';
 import UploadList, { LinkList } from './UploadList';
 import ProfileForm from './ProfileForm';
 
@@ -23,7 +23,7 @@ function MyApp(props) {
 				<h2>6:9 ratio, images only, multiple files:</h2>
 				<Upload ratio={6/9} filetype='image' multiple={true} uploadlist={LinkList} />
 				<h2>Audio only, multiple files:</h2>
-				<Upload ratio={0} filetype='audio' multiple={true} uploadlist={UploadList} />
+				<Upload ratio={0} filetype='audio' multiple={true} uploadlist={UploadList} /> 
 			</div>
 		</Provider>
 	);
