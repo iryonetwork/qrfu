@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`List displays the file links 1`] = `
+exports[`List displays the file link without Delete All button 1`] = `
 <ul>
   <li>
     <a
@@ -8,13 +8,77 @@ exports[`List displays the file links 1`] = `
     >
       file-img
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
   </li>
+</ul>
+`;
+
+exports[`List displays the file links 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    Delete All
+  </button>
+  <ul>
+    <li>
+      <a
+        href="http://localhost:3001/"
+      >
+        file-img
+      </a>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </li>
+    <li>
+      <a
+        href="http://localhost:3001/"
+      >
+        file-audio
+      </a>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`List displays upload without Delete All button 1`] = `
+<ul
+  className="custom"
+>
   <li>
     <a
       href="http://localhost:3001/"
     >
-      file-audio
+      <img
+        alt="preview"
+        src="http://localhost:3001/"
+      />
+      <div>
+        file-img
+      </div>
     </a>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
   </li>
 </ul>
 `;
@@ -48,7 +112,72 @@ exports[`List displays uploads in their specific formats 1`] = `
 </ul>
 `;
 
+exports[`List displays uploads with Delete All button 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    Delete All
+  </button>
+  <ul
+    className="custom"
+  >
+    <li>
+      <a
+        href="http://localhost:3001/"
+      >
+        <img
+          alt="preview"
+          src="http://localhost:3001/"
+        />
+        <div>
+          file-img
+        </div>
+      </a>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </li>
+    <li>
+      <audio
+        controls={true}
+        src="http://localhost:3001/"
+      />
+      <div>
+        file-audio
+      </div>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
+`;
+
 exports[`Profile image displays first file 1`] = `
+<span>
+  <img
+    alt="avatar"
+    className="profilePic"
+    src="http://localhost:3001/"
+  />
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    Delete
+  </button>
+</span>
+`;
+
+exports[`Profile image does not display delete button 1`] = `
 <span>
   <img
     alt="avatar"

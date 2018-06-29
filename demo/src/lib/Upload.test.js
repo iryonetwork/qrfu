@@ -3,6 +3,7 @@ import enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Upload from './Upload';
 import UploadList from '../UploadList';
+import UploadDisplay from './UploadDisplay';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -11,7 +12,7 @@ let wrapper, socket;
 beforeEach(() => {
     jest.mock('../UploadList', () => () => <ul></ul>);
     jest.mock('./UploadDisplay', () => 'UploadDisplay');
-        
+
     const fetchData = {json: function() {
         return {url: '127.0.0.1:3000/ui/123', uid: '123'}
     }};
@@ -28,7 +29,7 @@ describe('Testing with multiple=true', () => {
             uid: '123',
             type: 'image',
         };
-
+    
         socket = {
             join: jest.fn(),
             receive: jest.fn().mockImplementation((func) => func(file)),
@@ -241,6 +242,33 @@ describe('Testing socket disconnect', () => {
         wrapper.update();
         expect(socket.receive.mock.calls.length).toEqual(1);
         expect(wrapper.state().isError).toEqual(true);
+    });
+
+});
+
+describe('Testing socket reconnect', () => {
+
+    beforeEach(() => {
+        socket = {
+            join: jest.fn().mockImplementation(
+                (uid, ratio, filetype, multiple, onDisconnect, onReconnect) => {
+                    onDisconnect();
+                    onReconnect();
+                }
+            ),
+            receive: jest.fn(),
+            disconnect: jest.fn(),
+        };
+
+        wrapper = mount(
+            <Upload ratio={0} filetype='image' multiple={true} uploadlist={UploadList} socket={socket} />
+        );
+    });
+
+    test('Upload should recover from disconnect', async () => {
+        wrapper.update();
+        expect(socket.receive.mock.calls.length).toEqual(1);
+        expect(wrapper.state().isError).toEqual(false);
     });
 
 });

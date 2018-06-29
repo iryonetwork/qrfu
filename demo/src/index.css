@@ -40,18 +40,18 @@ form .profilePic {
     background-color: #e4e4e4;
 }
 
-.code {
+.qr-container {
 	background-color: aliceblue;
 	margin: 20px;
 	padding: 20px;
 }
 
-form > .code {
+form > .qr-container {
 	margin: 5px 0 20px 0;
 	padding: 0;
 }
 
-.connected {
+.qr-connection {
 	width: 128px;
 	height: 118px;
 	padding-top: 10px;
@@ -60,7 +60,7 @@ form > .code {
 	vertical-align: bottom;
 }
 
-.connected > p {
+.qr-connection > p {
 	font-size: 1em;
 	font-weight: bold;
 	margin: 0.5em;

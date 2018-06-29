@@ -9,22 +9,22 @@ export default function UploadDisplay(props) {
 
 	if (props.isError) {
 		return (
-			<div className='code'>
-				<div className="connected">
-					<img src={errorImage} alt="error" />
+			<div className='qr-container'>
+				<div className='qr-connection'>
+					<img src={errorImage} alt='error' />
 					<p>Disconnected</p>
 				</div>
 			</div>
 		);
 	} else {
 		return (
-			<div className='code'>
+			<div className='qr-container'>
 				{isLoaded && !props.connection && 
 					<QRCode value={`http://${props.url}/ui/${props.uid}`} />
 				}
 				{isLoaded && props.connection && 
-					<div className="connected">
-						<img src={linkImage} alt="success" />
+					<div className='qr-connection'>
+						<img src={linkImage} alt='success' />
 						<p>Connected</p>
 					</div>
 				}
