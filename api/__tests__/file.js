@@ -1,14 +1,15 @@
 let socket = require('../socket');
-let multer = require('multer');
-const fs = require('fs');
 
-let req, res, next, mockClient, controller;
+let req, res, next, mockClient, controller, fs, multer;
 
 describe('test file upload', () => {
     beforeEach(() => {
         jest.mock('fs');
         jest.mock('multer');
+
         multer = require('multer');
+        fs = require('fs');
+        
         multer.mockImplementation(() => {
             return {single: jest.fn().mockImplementation(() =>
                 jest.fn().mockImplementation((req, res, func) => {
@@ -16,6 +17,8 @@ describe('test file upload', () => {
                 })
             )};
         });
+
+        fs.readdir.mockImplementation((dir, fn) => fn(null, []));
 
         controller = require('../controllers/uploadController');
 
@@ -51,9 +54,10 @@ describe('test file upload', () => {
         expect(res.status.mock.calls.length).toEqual(1);
     });
 
-    it('it should upload a file in single file mode', async () => {
+    it('it should upload a file in single file mode', () => {
         socket.addClient('111', 1, 'image', false, mockClient);
         controller.upload(req, res, next);
+        expect(fs.readdir.mock.calls.length).toEqual(1);
         expect(mockClient.emit.mock.calls.length).toEqual(1);
         expect(res.status.mock.calls.length).toEqual(1);
     });

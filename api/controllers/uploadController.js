@@ -93,7 +93,7 @@ exports.download = function(req, res) {
 
 exports.delete = function(req, res) {
     const name = req.params.name;
-    
+
     fs.unlink(`./uploads/${name}`, (err) => {
         if (err) {
             res.status(500).end();
@@ -111,6 +111,8 @@ var uploadFile = function (id, req, res, next) {
     upload(req, res, function(err) {
         if (err) {
             next(err);
+        } else if (!req.file) {
+            res.status(500).end();
         } else {
             const name = req.file.filename;
             const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;

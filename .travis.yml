@@ -10,5 +10,5 @@ script:
   - cd $DIR
   - npm install
   - if [ "$DIR" = "demo" ] ; then npm run build ; fi
+  - if [ "$DIR" = "api" ] ; then mkdir uploads ; fi
   - npm test
-
