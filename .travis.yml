@@ -1,0 +1,30 @@
+matrix:
+	include:
+	- language: node_js
+		node_js:
+			- "6"
+	
+		before_install:
+			- cd demo
+			- npm install
+
+		script:
+			- npm run build
+			- npm test
+
+		after_success:
+			- echo "DONE"
+
+	- language: node_js
+		node_js:
+			- "6"
+	
+		before_install:
+			- cd api
+			- npm install
+
+		script:
+			- npm test
+
+		after_success:
+			- echo "DONE"

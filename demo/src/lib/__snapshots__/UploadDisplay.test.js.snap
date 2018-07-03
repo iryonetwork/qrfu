@@ -9,6 +9,7 @@ exports[`UploadDisplay loads with QR code 1`] = `
     style={
       Object {
         "height": 128,
+        "padding": "10px",
         "width": 128,
       }
     }
@@ -26,6 +27,14 @@ exports[`UploadDisplay loads with connected text 1`] = `
 >
   <div
     className="qr-connection"
+    style={
+      Object {
+        "height": "118px",
+        "padding": "20px 10px 10px 10px",
+        "textAlign": "center",
+        "width": "128px",
+      }
+    }
   >
     <img
       alt="success"
@@ -47,6 +56,14 @@ exports[`UploadDisplay loads with error 1`] = `
 >
   <div
     className="qr-connection"
+    style={
+      Object {
+        "height": "118px",
+        "padding": "20px 10px 10px 10px",
+        "textAlign": "center",
+        "width": "128px",
+      }
+    }
   >
     <img
       alt="error"

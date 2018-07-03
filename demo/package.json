@@ -1,10 +1,10 @@
 {
-  "name": "qrfu-client",
-  "version": "0.1.0",
+  "name": "react-qrfu",
+  "version": "0.1.0-alpha",
+  "description": "React component for simple remote upload of multimedia files.",
   "private": true,
   "license": "Apache-2.0",
-  "main": "./build/lib/index.js",
-  "module": "./build/lib/index.es.js",
+  "main": "./lib/index.js",
   "publishConfig": {
     "access": "restricted"
   },

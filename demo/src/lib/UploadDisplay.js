@@ -4,13 +4,15 @@ import QRCode from 'qrcode.react';
 import linkImage from './assets/link.png';
 import errorImage from './assets/error.png';
 
+let connectionStyle = {textAlign: 'center', width: '128px', height: '118px', padding: '20px 10px 10px 10px'};
+
 export default function UploadDisplay(props) {
 	const isLoaded = props.uid !== '';
 
 	if (props.isError) {
 		return (
 			<div className='qr-container'>
-				<div className='qr-connection'>
+				<div className='qr-connection' style={connectionStyle}>
 					<img src={errorImage} alt='error' />
 					<p>Disconnected</p>
 				</div>
@@ -20,10 +22,10 @@ export default function UploadDisplay(props) {
 		return (
 			<div className='qr-container'>
 				{isLoaded && !props.connection && 
-					<QRCode value={`http://${props.url}/ui/${props.uid}`} />
+					<QRCode style={{padding: '10px'}} value={`http://${props.url}/ui/${props.uid}`} />
 				}
 				{isLoaded && props.connection && 
-					<div className='qr-connection'>
+					<div className='qr-connection' style={connectionStyle}>
 						<img src={linkImage} alt='success' />
 						<p>Connected</p>
 					</div>

@@ -11,6 +11,7 @@ api/uploads
 
 # production
 **/build
+demo/lib
 
 # misc
 .DS_Store
