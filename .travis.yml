@@ -1,30 +1,14 @@
-matrix:
-	include:
-	- language: node_js
-		node_js:
-			- "6"
-	
-		before_install:
-			- cd demo
-			- npm install
+language: node_js
+node_js:
+  - "8"
 
-		script:
-			- npm run build
-			- npm test
+env:
+  - DIR=demo
+  - DIR=api
 
-		after_success:
-			- echo "DONE"
+script:
+  - cd $DIR
+  - npm install
+  - if [ "$DIR" = "demo" ] ; then npm run build ; fi
+  - npm test
 
-	- language: node_js
-		node_js:
-			- "6"
-	
-		before_install:
-			- cd api
-			- npm install
-
-		script:
-			- npm test
-
-		after_success:
-			- echo "DONE"
