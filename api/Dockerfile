@@ -8,5 +8,4 @@ RUN npm install --only=production
 
 COPY . .
 
-EXPOSE $PORT
 ENTRYPOINT [ "npm", "start" ]
