@@ -36,6 +36,7 @@ form .profilePic {
 	width: 128px;
 	height: 128px;
 	margin-left: 20px;
+	margin: 10px;
     display: inline-block;
     background-color: #e4e4e4;
 }
@@ -49,15 +50,6 @@ form .profilePic {
 form > .qr-container {
 	margin: 5px 0 20px 0;
 	padding: 0;
-}
-
-.qr-connection {
-	width: 128px;
-	height: 118px;
-	padding-top: 10px;
-    display: inline-block;
-	text-align: center;
-	vertical-align: bottom;
 }
 
 .qr-connection > p {

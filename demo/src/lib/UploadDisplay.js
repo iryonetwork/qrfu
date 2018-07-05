@@ -22,7 +22,7 @@ export default function UploadDisplay(props) {
 		return (
 			<div className='qr-container'>
 				{isLoaded && !props.connection && 
-					<QRCode style={{padding: '10px'}} value={`http://${props.url}/ui/${props.uid}`} />
+					<QRCode style={{padding: '10px'}} value={`${props.url}/ui/${props.uid}`} />
 				}
 				{isLoaded && props.connection && 
 					<div className='qr-connection' style={connectionStyle}>

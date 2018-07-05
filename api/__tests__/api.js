@@ -14,7 +14,6 @@ describe('/GET api information', () => {
             .end((err, res) => {
                 expect(res.statusCode).toBe(200);
                 expect(res.body).toHaveProperty('uid');
-                expect(res.body).toHaveProperty('url');
                 done();
             });
     });

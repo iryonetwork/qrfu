@@ -1,7 +1,10 @@
 {
-  "name": "uploadapi",
-  "version": "1.0.0",
+  "name": "qrfu-api",
+  "version": "0.2.0-alpha",
   "description": "",
+  "publishConfig": {
+    "access": "private"
+  },
   "main": "server.js",
   "license": "Apache-2.0",
   "scripts": {

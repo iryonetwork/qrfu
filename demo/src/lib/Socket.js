@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 export default class Socket {
     constructor() {
         if (!this.socket) {
-            this.socket = io();
+            this.socket = io(process.env.REACT_APP_QR_URL || '127.0.0.1:3001');
         }
     }
 

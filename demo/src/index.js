@@ -11,7 +11,7 @@ function MyApp(props) {
 	const submit = values => {
 		window.alert (JSON.stringify (values));
 	};
-	  
+
 	return (
 		<Provider store={ store }>
 			<div>

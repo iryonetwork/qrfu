@@ -17,8 +17,8 @@ const socket = {
             }
         });
     },
-    send: (id, name, type, url) => {
-        clients[id].socket.emit('messages', {name: name, type: type, url: url, uid: id});
+    send: (id, name, type) => {
+        clients[id].socket.emit('messages', {name: name, type: type, uid: id});
     },
     notifyConnected: id => {
         clients[id].socket.emit('messages', {connected: true, uid: id});

@@ -1,12 +1,11 @@
 {
-  "name": "react-qrfu",
-  "version": "0.1.0-alpha",
+  "name": "@iryo/react-qrfu",
+  "version": "0.2.0-alpha",
   "description": "React component for simple remote upload of multimedia files.",
-  "private": true,
   "license": "Apache-2.0",
   "main": "./lib/index.js",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "dependencies": {
     "qrcode.react": "^0.8.0",
@@ -21,7 +20,6 @@
     "build": "rollup -c",
     "prepare": "npm run build"
   },
-  "proxy": "http://127.0.0.1:3001/",
   "peerDependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
@@ -33,9 +31,9 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "dotenv": "^6.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "mock-socket": "^7.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",

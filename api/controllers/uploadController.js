@@ -33,9 +33,7 @@ const upload = multer({
 
 exports.fetch = function(req, res) {
     const uid = crypto.randomBytes(16).toString('hex');
-    const url = `${req.connection.localAddress}:${req.connection.localPort}`;
-    let imageData = {url: url, uid: uid};
-    res.json(imageData);
+    res.json({uid: uid});
 };
 
 exports.upload = function(req, res, next) {
@@ -115,7 +113,6 @@ var uploadFile = function (id, req, res, next) {
             res.status(500).end();
         } else {
             const name = req.file.filename;
-            const url = `http://${req.connection.localAddress}:${req.connection.localPort}/api/file/${name}`;
             var type = 'none';
             
             if (req.file.mimetype.startsWith('audio')) {
@@ -124,7 +121,7 @@ var uploadFile = function (id, req, res, next) {
                 type = 'image';
             }
 
-            socket.send(id, name, type, url);
+            socket.send(id, name, type);
             res.status(200).end();
         }
     });

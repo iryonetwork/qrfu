@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import UploadDisplay from './UploadDisplay';
 import Socket from './Socket';
+import dotenv from 'dotenv';
+dotenv.load();
 
 const socket = new Socket();
+// qrfu-api server url
+const url = process.env.REACT_APP_QR_URL || 'http://127.0.0.1:3001';
 
 /**
  * Props of Upload component:
@@ -26,7 +30,6 @@ export default class Upload extends React.Component {
 		super(props);
 		
 		this.state = {
-			url: '',
 			uid: '',
 			uploads: [],
 			isError: false,
@@ -35,10 +38,9 @@ export default class Upload extends React.Component {
 
 		this.delete = this.delete.bind(this);
 
-		fetch('/api/fetch')
+		fetch(`${url}/api/fetch`)
 			.then(results => results.json())
 			.then(data => {
-				this.setState({url: data.url});
 				this.setState({uid: data.uid});
 				this.connect();
 			})
@@ -75,6 +77,8 @@ export default class Upload extends React.Component {
 			}
 		}
 
+		upload.url = `${url}/api/file/${upload.name}`;
+
 		const uploads = this.state.uploads.slice();
 		
 		if (!this.props.multiple) {
@@ -92,7 +96,7 @@ export default class Upload extends React.Component {
 	}
 
 	delete(fileName) {
-		fetch(`/api/file/${fileName}`, {method: 'DELETE'})
+		fetch(`${url}/api/file/${fileName}`, {method: 'DELETE'})
 			.then(data => {
 				if (data.status === 200) {
 					this.setState({mobileConnection: false});
@@ -120,7 +124,7 @@ export default class Upload extends React.Component {
 		return (
 			<UploadDisplay
 				uid={this.state.uid}
-				url={this.state.url}
+				url={url}
 				uploadlist={this.props.uploadlist}
 				uploads={this.state.uploads}
 				delete={this.delete}
