@@ -7,13 +7,13 @@ services:
 
 env:
   matrix:
-  - DIR=demo
+  - DIR=component
   - DIR=api
 
 script:
 - cd $DIR
 - npm install
-- if [ "$DIR" = "demo" ] ; then npm run build ; fi
+- if [ "$DIR" = "component" ] ; then npm run build ; fi
 - if [ "$DIR" = "api" ] ; then mkdir uploads ; fi
 - if [ "$DIR" = "api" ] ; then docker build -t iryo/qrfu-api . ; fi
 - npm test
@@ -26,7 +26,7 @@ jobs:
   - stage: npm release
     node_js: '8'
     script: skip
-    env: DIR=demo
+    env: DIR=component
     deploy:
       provider: npm
       email: $NPM_EMAIL

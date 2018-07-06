@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import UploadList, { LinkList, ProfileImage } from './UploadList';
+import UploadList, { LinkList, ProfileImage } from './UploadList';import Socket from './lib/Socket';
 
 test('List displays uploads in their specific formats', () => {
     const files = [

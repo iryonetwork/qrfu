@@ -1,13 +1,11 @@
 import io from 'socket.io-client';
 
 export default class Socket {
-    constructor() {
+    join(url, uid, ratio, filetype, multiple, onDisconnect, onReconnect) {
         if (!this.socket) {
-            this.socket = io(process.env.REACT_APP_QR_URL || '127.0.0.1:3001');
+            this.socket = io(url);
         }
-    }
 
-    join(uid, ratio, filetype, multiple, onDisconnect, onReconnect) {
         const self = this;
 
 		this.socket.on('connect', () => self.socket.emit('join', uid, ratio, filetype, multiple));

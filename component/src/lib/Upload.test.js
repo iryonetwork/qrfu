@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Upload from './Upload';
 import UploadList from '../UploadList';
 import UploadDisplay from './UploadDisplay';
+import Socket from './Socket';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -228,7 +229,7 @@ describe('Testing socket disconnect', () => {
     beforeEach(() => {
         socket = {
             join: jest.fn().mockImplementation(
-                (uid, ratio, filetype, multiple, onDisconnect, onReconnect) => onDisconnect()),
+                (url, uid, ratio, filetype, multiple, onDisconnect, onReconnect) => onDisconnect()),
             receive: jest.fn(),
             disconnect: jest.fn(),
         };
@@ -251,7 +252,7 @@ describe('Testing socket reconnect', () => {
     beforeEach(() => {
         socket = {
             join: jest.fn().mockImplementation(
-                (uid, ratio, filetype, multiple, onDisconnect, onReconnect) => {
+                (url, uid, ratio, filetype, multiple, onDisconnect, onReconnect) => {
                     onDisconnect();
                     onReconnect();
                 }

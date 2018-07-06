@@ -5,7 +5,6 @@ import Socket from './Socket';
 import dotenv from 'dotenv';
 dotenv.load();
 
-const socket = new Socket();
 // qrfu-api server url
 const url = process.env.REACT_APP_QR_URL || 'http://127.0.0.1:3001';
 
@@ -51,6 +50,7 @@ export default class Upload extends React.Component {
 
 	connect() {
 		this.props.socket.join(
+			url,
 			this.state.uid,
 			this.props.ratio,
 			this.props.filetype,
@@ -158,5 +158,5 @@ Upload.propTypes = {
 }
 
 Upload.defaultProps = {
-	socket: socket,
+	socket: new Socket(),
 }
