@@ -5,6 +5,10 @@ node_js:
 services:
 - docker
 
+cache:
+  directories:
+  - $HOME/.npm
+
 env:
   matrix:
   - DIR=component
@@ -15,31 +19,29 @@ script:
 - npm install
 - if [ "$DIR" = "component" ] ; then npm run build ; fi
 - if [ "$DIR" = "api" ] ; then mkdir uploads ; fi
-- if [ "$DIR" = "api" ] ; then docker build -t iryo/qrfu-api . ; fi
 - npm test
-
-before_deploy:
-- cd $DIR
 
 jobs:
   include:
   - stage: npm release
     node_js: '8'
-    script: skip
+    script: 
+      - cd component
+      - npm install
     env: DIR=component
     deploy:
       provider: npm
       email: $NPM_EMAIL
+      skip_cleanup: true
       api_key:
         secure: Uxxw5YX1IYMXhx40I/sWA9ShI+7cjBZgchewvCZ4tksC8iiPV2fGAJzCzv2SBtc7GqviiG1M7a/JsvVi992ocRtcl8+MLAxNqC8/N+tZwAN7IKP2tjLzhejoL5npznivq7M9arkqpAncr/NzUxp5ws/g1f1MgMKxoO7qhGOzA/Qiac88ZIYVDC5LYhUY15Za9d+fqnp46GupoI+qPj3jAtQqdOuqSjo3e24FPlk9xv2WFV1L25tFnS/O1gZwpKkaEUz13bVZ9I8Ih8JPtuuIksZPLlekfIz+UoqmYYTaL3B8H9a5r/Gy7Z5qHvd3vy2c7eOKQRhXZAtaE2I12Q6hbHTY4L2cWyevGFBEe14Pim5cJzKVrJoN0+v8PgAf+ZX07JfA92z1tiCF8l2Mbccl9WuRar1kjghXj1FWWb+8G882QWM54uBlnDURgKta0gPRPYMV2UK9cuecS4vAT5rFBUugbDSjUSFVoq447z+j1aR14UJsErKXp3UiITGqWOkI9xZJiMnlneAU4ZF8Z7YiSulptFRSAOwZPpTvNiO9Kl5m7DfMIgXI1BBC6KJXomp82LuhJIOxnHQAOluNpJ7XiOLuNb7fW1wANzdNi8ws2uplyTtS5Zj+AYzLneeyVf6KLXw//KfxA3c6+P19CgJFdFbcSAmUNtCT6Ekuai2ZI/g=
       on:
         tags: true
-        repo: iryo/react-qrfu
-  - stage: deploy
-    script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker build -t iryo/qrfu-api .
-    - docker push iryo/qrfu-api:$TRAVIS_TAG
-    - docker push iryo/qrfu-api:latest
+  - stage: build docker image
     env: DIR=api
-    if: tag = true
+    script: skip
+    deploy:
+      provider: script
+      script: bash docker-deploy.sh
+      on:
+        tags: true
