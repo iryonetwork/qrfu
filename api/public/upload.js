@@ -78,6 +78,7 @@ var sendFile = function(form) {
                 document.getElementById('message').innerText = 'Failed to upload, please try again.';
             }
         }
+        document.getElementById('title').innerText = 'Upload Document';
     };
     
     request.open('POST', '/api/upload/' + uid, true);

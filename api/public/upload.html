@@ -10,13 +10,16 @@
         <script type="text/javascript" src="/scripts/exif.js" defer></script>
         <script type="text/javascript" src="/scripts/cropper.min.js" defer></script>
         <script type="text/javascript" src="/image.js" defer></script>
-        <script type="text/javascript" src="/audio.js" defer></script>
         <script type="text/javascript" src="/upload.js" defer></script>
+
+        <script type="text/javascript" src="/audio/audio.js" defer></script>
+        <script type="text/javascript" src="/audio/RecorderService.js" defer></script>
+        <script type="text/javascript" src="/audio/encoderWavWorker.js" defer></script>
     </head>
     <body>
         <form id="upload" autocomplete="off">
 
-            <h1>Upload Document</h1>
+            <h1 id="title">Upload Document</h1>
 
             <img src="/loading.gif" id="spinner" alt="loading">
 
@@ -30,7 +33,7 @@
             </div>
 
             <div id="audioInputAlt" class="fileHolder">
-                <label id="audioButtonAlt" class="fileButton" for="audio">RECORD AUDIO</label>
+                <label id="audioButtonAlt" class="fileButton" for="audio">UPLOAD AUDIO</label>
                 <input name="audio" id="audio" type="file" accept="audio/*" capture="microphone">
             </div>
 
@@ -49,7 +52,13 @@
             <h1 id="timer"></h1>
 
             <div id="audioControls">
-                <button type="button" id="stopButton"><img src="/stop.png" alt="stop recording"></button>
+                <button type="button" id="backButton">
+                    <img src="/arrow.png">
+                </button>
+                <div class="wrapCircle" id="stopButton">
+                    <div class="circle"></div>
+                </div>
+                <button type="button" id="finishButton">DONE</button>
             </div>
 
             <button id="submit" type="submit" disabled>SUBMIT</button>

@@ -12,6 +12,7 @@ html, body {
 
 h1 {
     text-align: center;
+    font-size: 1.5em;
 }
 
 form {
@@ -43,6 +44,35 @@ div.fileHolder.retake label.fileButton, div.fileHolder.retake button {
     background-color: #0296e6;
     box-shadow: none;
     padding: 1.5em 0;
+}
+
+#finishButton, #backButton, #audioInputAlt.retake label {
+    color: #FFF;
+    background-color: #000000;
+    box-shadow: none;
+    position: absolute;
+}
+
+#finishButton {
+    right: 1em;
+    bottom: 0;
+    display: none;
+    padding: 0 0 3em 0;
+}
+
+#backButton {
+    left: 1em;
+    bottom: 0;
+    padding: 0 0 2em 0;
+}
+
+#audioInputAlt.retake {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    transform: translateX(-300px);
 }
 
 button:disabled {
@@ -83,6 +113,9 @@ h2#message, h1#timer {
     display: none;
     padding: 0 1em;
 }
+h1#timer {
+    font-size: 3em;
+}
 
 div#imgContainer, div#audioContainer, div#audioControls {
     height: 100%;
@@ -119,42 +152,61 @@ audio#audioPreview {
 
 .rotate90 {
     -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-
     -webkit-transform-origin: 50% 50%;
-    -moz-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
     -o-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
 }
 
 .rotate180 {
     -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
     -o-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
     transform: rotate(180deg);
-
     -webkit-transform-origin: 50% 50%;
-    -moz-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
     -o-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
 }
 
 .rotate270 {
     -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
     -o-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
     transform: rotate(270deg);
-
     -webkit-transform-origin: 50% 50%;
-    -moz-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
     -o-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
+}
+
+.wrapCircle {
+    width: 3em;
+    height: 3em;
+    border-radius: 2em;
+    border: 0.5em solid #FFF;
+    margin-bottom: 2em;
+}
+
+.circle {
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    width: 2em;
+    height: 2em;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    background: #ff3b30;
+}
+
+@keyframes expand {
+    from {
+        width: 2em;
+        height: 2em;
+        margin: 0.5em;
+        border-radius: 0.5em;
+    }
+    to {
+        width: 3em;
+        height: 3em;
+        margin: 0;
+        border-radius: 2em;
+    }
 }
