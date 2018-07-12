@@ -21,15 +21,11 @@ class ProfileForm extends React.Component {
 
 		return (
 			<form onSubmit={handleSubmit}>
-				<label>Username:</label>
-				<Field name='username' component='input' type="text" />
-				<label>Password:</label>
-				<Field name='password' component='input' type='password' />
-				<label>Profile Image:</label>
-				<p>Scan the QR code to upload a profile picture.</p>
+				<Field name='username' component='input' type="text" placeholder="username" />
+				<Field name='password' component='input' type='password' placeholder="password" />
+				<button type='submit'>Register</button>
 				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} onChange={this.handleUpload} />
 				<Field name='avatar' component='input' type='hidden' />
-				<button type='submit'>Register</button>
 			</form>
 		);
 	}

@@ -11,7 +11,7 @@ export default function UploadList(props) {
                         <div>{file.name}</div>
 
                         {props.delete &&
-                            <button type="button" onClick={() => props.delete(file.name)}>Delete</button>
+                            <button className="qr-delete" type="button" onClick={() => props.delete(file.name)}><img src="/delete.png" alt="delete file"/></button>
                         }
                     </li>);
         } else {
@@ -22,7 +22,7 @@ export default function UploadList(props) {
                         </a>
 
                         {props.delete && 
-                            <button type="button" onClick={() => props.delete(file.name)}>Delete</button>
+                            <button className="qr-delete" type="button" onClick={() => props.delete(file.name)}><img src="/delete.png" alt="delete file"/></button>
                         }
                     </li>);
         }
@@ -31,7 +31,7 @@ export default function UploadList(props) {
     if (props.uploads.length > 1 && props.delete) {
         return (
             <div>
-                <button type="button" onClick={() => {props.uploads.forEach(f => props.delete(f.name))}}>
+                <button className="qr-delete-all" type="button" onClick={() => {props.uploads.forEach(f => props.delete(f.name))}}>
                     Delete All
                 </button>
 
@@ -52,7 +52,7 @@ export function LinkList(props) {
                 {file.name}
             </a>
             {props.delete &&
-                <button type="button" onClick={() => props.delete(file.name)}>Delete</button>
+                <button className="qr-delete" type="button" onClick={() => props.delete(file.name)}><img src="/delete.png" alt="delete file"/></button>
             }
         </li>)
     );
@@ -60,7 +60,7 @@ export function LinkList(props) {
     if (props.uploads.length > 1 && props.delete) {
         return (
             <div>
-                <button type="button" onClick={() => {props.uploads.forEach(f => props.delete(f.name))}}>
+                <button className="qr-delete-all" type="button" onClick={() => {props.uploads.forEach(f => props.delete(f.name))}}>
                     Delete All
                 </button>
 
@@ -81,7 +81,7 @@ export function ProfileImage(props) {
                 <img className='profilePic' src={`${props.uploads[0].url}`} alt='avatar' />
 
                 {props.delete && 
-                    <button type="button" onClick={() => props.delete(props.uploads[0].name)}>Delete</button>
+                    <button className="qr-delete" type="button" onClick={() => props.delete(props.uploads[0].name)}><img src="/delete.png" alt="delete file"/></button>
                 }
             </span>
         );

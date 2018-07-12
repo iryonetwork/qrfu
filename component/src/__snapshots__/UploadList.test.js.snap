@@ -9,10 +9,14 @@ exports[`List displays the file link without Delete All button 1`] = `
       file-img
     </a>
     <button
+      className="qr-delete"
       onClick={[Function]}
       type="button"
     >
-      Delete
+      <img
+        alt="delete file"
+        src="/delete.png"
+      />
     </button>
   </li>
 </ul>
@@ -21,6 +25,7 @@ exports[`List displays the file link without Delete All button 1`] = `
 exports[`List displays the file links 1`] = `
 <div>
   <button
+    className="qr-delete-all"
     onClick={[Function]}
     type="button"
   >
@@ -34,10 +39,14 @@ exports[`List displays the file links 1`] = `
         file-img
       </a>
       <button
+        className="qr-delete"
         onClick={[Function]}
         type="button"
       >
-        Delete
+        <img
+          alt="delete file"
+          src="/delete.png"
+        />
       </button>
     </li>
     <li>
@@ -47,10 +56,14 @@ exports[`List displays the file links 1`] = `
         file-audio
       </a>
       <button
+        className="qr-delete"
         onClick={[Function]}
         type="button"
       >
-        Delete
+        <img
+          alt="delete file"
+          src="/delete.png"
+        />
       </button>
     </li>
   </ul>
@@ -74,10 +87,14 @@ exports[`List displays upload without Delete All button 1`] = `
       </div>
     </a>
     <button
+      className="qr-delete"
       onClick={[Function]}
       type="button"
     >
-      Delete
+      <img
+        alt="delete file"
+        src="/delete.png"
+      />
     </button>
   </li>
 </ul>
@@ -115,6 +132,7 @@ exports[`List displays uploads in their specific formats 1`] = `
 exports[`List displays uploads with Delete All button 1`] = `
 <div>
   <button
+    className="qr-delete-all"
     onClick={[Function]}
     type="button"
   >
@@ -136,10 +154,14 @@ exports[`List displays uploads with Delete All button 1`] = `
         </div>
       </a>
       <button
+        className="qr-delete"
         onClick={[Function]}
         type="button"
       >
-        Delete
+        <img
+          alt="delete file"
+          src="/delete.png"
+        />
       </button>
     </li>
     <li>
@@ -151,10 +173,14 @@ exports[`List displays uploads with Delete All button 1`] = `
         file-audio
       </div>
       <button
+        className="qr-delete"
         onClick={[Function]}
         type="button"
       >
-        Delete
+        <img
+          alt="delete file"
+          src="/delete.png"
+        />
       </button>
     </li>
   </ul>
@@ -169,10 +195,14 @@ exports[`Profile image displays first file 1`] = `
     src="http://localhost:3001/"
   />
   <button
+    className="qr-delete"
     onClick={[Function]}
     type="button"
   >
-    Delete
+    <img
+      alt="delete file"
+      src="/delete.png"
+    />
   </button>
 </span>
 `;

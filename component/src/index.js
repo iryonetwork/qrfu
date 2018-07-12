@@ -15,15 +15,99 @@ function MyApp(props) {
 	return (
 		<Provider store={ store }>
 			<div>
-				<h1>QR Upload Examples</h1>
-				<h2>1:1 ratio, images only, single file: (redux form)</h2>
-				<ProfileForm onSubmit={submit}/>
-				<h2>Any ratio, any filetype, multiple files:</h2>
-				<Upload ratio={0} filetype='all' multiple={true} uploadlist={UploadList} />
-				<h2>6:9 ratio, images only, multiple files:</h2>
-				<Upload ratio={6/9} filetype='image' multiple={true} uploadlist={LinkList} />
-				<h2>Audio only, multiple files:</h2>
-				<Upload ratio={0} filetype='audio' multiple={true} uploadlist={UploadList} /> 
+				<img src="/iryoqrlogo.png" className="logo" alt="iryo qr logo" />
+				
+				<div className="example">
+					<h2>Example 1</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>Ratio:</td>
+								<td><b>1:1</b></td>
+							</tr>
+							<tr>
+								<td>Filetype:</td>
+								<td><b>images</b></td>
+							</tr>
+							<tr>
+								<td>Quantity</td>
+								<td><b>single</b></td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Scan the QR code to upload a profile image.</p>
+					<p>Uploaded documents:</p>
+					<ProfileForm onSubmit={submit}/>
+				</div>
+				
+				<div className="example">
+					<h2>Example 2</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>Ratio:</td>
+								<td><b>any</b></td>
+							</tr>
+							<tr>
+								<td>Filetype:</td>
+								<td><b>any</b></td>
+							</tr>
+							<tr>
+								<td>Quantity</td>
+								<td><b>multiple</b></td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Scan the QR code to upload a file.</p>
+					<p>Uploaded documents:</p>
+					<Upload ratio={0} filetype='all' multiple={true} uploadlist={UploadList} />
+				</div>
+				
+				<div className="example">
+					<h2>Example 3</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>Ratio:</td>
+								<td><b>6:9</b></td>
+							</tr>
+							<tr>
+								<td>Filetype:</td>
+								<td><b>images</b></td>
+							</tr>
+							<tr>
+								<td>Quantity</td>
+								<td><b>multiple</b></td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Scan the QR code to upload a file.</p>
+					<p>Uploaded documents:</p>
+					<Upload ratio={6/9} filetype='image' multiple={true} uploadlist={LinkList} />
+				</div>
+				
+				<div className="example">
+					<h2>Example 4</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>Ratio:</td>
+								<td><b>n/a</b></td>
+							</tr>
+							<tr>
+								<td>Filetype:</td>
+								<td><b>audio</b></td>
+							</tr>
+							<tr>
+								<td>Quantity</td>
+								<td><b>multiple</b></td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Scan the QR code to upload a file.</p>
+					<p>Uploaded documents:</p>
+					<Upload ratio={0} filetype='audio' multiple={true} uploadlist={UploadList} /> 
+				</div>
 			</div>
 		</Provider>
 	);
