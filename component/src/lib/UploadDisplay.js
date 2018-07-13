@@ -21,6 +21,7 @@ export default function UploadDisplay(props) {
 	} else {
 		return (
 			<div className='qr-container'>
+				{props.children}
 				{isLoaded && !props.connection && 
 					<QRCode style={{padding: '10px'}} value={`${props.url}/ui/${props.uid}`} />
 				}

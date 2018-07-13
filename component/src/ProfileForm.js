@@ -21,10 +21,14 @@ class ProfileForm extends React.Component {
 
 		return (
 			<form onSubmit={handleSubmit}>
-				<Field name='username' component='input' type="text" placeholder="username" />
-				<Field name='password' component='input' type='password' placeholder="password" />
-				<button type='submit'>Register</button>
-				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} onChange={this.handleUpload} />
+				<Upload ratio={1} filetype='image' multiple={false} uploadlist={ProfileImage} onChange={this.handleUpload}>
+					<div>
+						<Field name='username' component='input' type="text" placeholder="username" />
+						<Field name='password' component='input' type='password' placeholder="password" />
+						<button type='submit'>Register</button>
+					</div>
+				</Upload>
+
 				<Field name='avatar' component='input' type='hidden' />
 			</form>
 		);

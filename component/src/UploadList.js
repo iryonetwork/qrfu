@@ -76,18 +76,25 @@ export function LinkList(props) {
 
 export function ProfileImage(props) {
     if (props.uploads.length > 0) {
-        return (
-            <span>
-                <img className='profilePic' src={`${props.uploads[0].url}`} alt='avatar' />
+        let file = props.uploads[props.uploads.length - 1];
 
-                {props.delete && 
-                    <button className="qr-delete" type="button" onClick={() => props.delete(props.uploads[0].name)}><img src="/delete.png" alt="delete file"/></button>
-                }
-            </span>
+        return (
+            <ul className='custom'>
+                <li key={file.name}>
+                    <a href={`${file.url}`}>
+                        <img src={`${file.url}`} alt='preview' />
+                        <div>{file.name}</div>
+                    </a>
+
+                    {props.delete && 
+                        <button className="qr-delete" type="button" onClick={() => props.delete(file.name)}><img src="/delete.png" alt="delete file"/></button>
+                    }
+                </li>
+            </ul>
         );
     } else {
         return (
-            <div className='profilePic'></div>
+            <ul className='custom'></ul>
         );
     }
 }

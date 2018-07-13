@@ -44,7 +44,7 @@ div.example > p {
 	margin: 40px 0;
 }
 
-form button, form input {
+form div > button, form div > input {
 	display: block;
 	font-size: 0.9em;
 	width: 194px;
@@ -57,7 +57,7 @@ form button, form input {
 	background-color: rgb(247, 249, 250);
 }
 
-form button {
+form div > button {
 	border: none;
 	background-color: rgb(2, 150, 230);
 	color: #FFF;
@@ -73,21 +73,27 @@ form button {
 	border: 4px solid rgb(235, 241, 245);
 	background-color: #FFF;
 	padding: 30px !important;
-	margin-right: 206px;
+	margin-right: 204px;
 	margin-bottom: 80px;
 	float: left;
 }
 
-.qr-container > ul {
+.qr-container ul.custom {
 	width: calc(100% - 400px);
 	float: left;
 	padding: 0;
-	list-style-type: none;
 }
 
 form > .qr-container {
 	margin: 5px 0 20px 0;
 	padding: 0;
+	position: relative;
+}
+
+form ul.custom {
+	position: absolute;
+	top: 0;
+	left: 400px;
 }
 
 .qr-connection {
@@ -110,11 +116,12 @@ ul.custom {
 }
 
 ul.custom li {
-	display: inline-block;
 	position: relative;
-	max-width: 300px;
-	margin: 0 20px 0 0;
+	max-width: 500px;
+	height: 200px;
+	margin: 0 20px 80px 0;
 	word-wrap: break-word;
+	float: left;
 }
 
 ul.custom a {
@@ -129,19 +136,20 @@ ul.custom a div {
 }
 
 ul.custom li img {
-	max-width: 300px;
+	max-width: 500px;
 	max-height: 200px;
 }
 
 ul.custom li audio {
-	height: 200px;
+	height: 180px;
+	width: 280px;
+	padding: 10px;
 	background: #FFF url(/music.png) no-repeat center;
     background-position-y: 50px;
 }
 
-ul.custom li {
-	height: 200px;
-	margin-bottom: 80px;
+ul.custom li > div {
+	max-width: 300px;
 }
 
 button.qr-delete {
@@ -151,6 +159,8 @@ button.qr-delete {
 	width: 30px;
 	height: 30px;
 	border-radius: 15px;
+	border: none;
+	background-color: #FFF;
 }
 
 button.qr-delete img {

@@ -129,7 +129,9 @@ export default class Upload extends React.Component {
 				uploads={this.state.uploads}
 				delete={this.delete}
 				isError={this.state.isError}
-				connection={this.state.mobileConnection} />
+				connection={this.state.mobileConnection} >
+				{this.props.children}
+				</UploadDisplay>
 		)
 	}
 

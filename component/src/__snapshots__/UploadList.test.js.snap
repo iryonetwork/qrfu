@@ -188,37 +188,57 @@ exports[`List displays uploads with Delete All button 1`] = `
 `;
 
 exports[`Profile image displays first file 1`] = `
-<span>
-  <img
-    alt="avatar"
-    className="profilePic"
-    src="http://localhost:3001/"
-  />
-  <button
-    className="qr-delete"
-    onClick={[Function]}
-    type="button"
-  >
-    <img
-      alt="delete file"
-      src="/delete.png"
-    />
-  </button>
-</span>
+<ul
+  className="custom"
+>
+  <li>
+    <a
+      href="http://localhost:3001/"
+    >
+      <img
+        alt="preview"
+        src="http://localhost:3001/"
+      />
+      <div>
+        file-2
+      </div>
+    </a>
+    <button
+      className="qr-delete"
+      onClick={[Function]}
+      type="button"
+    >
+      <img
+        alt="delete file"
+        src="/delete.png"
+      />
+    </button>
+  </li>
+</ul>
 `;
 
 exports[`Profile image does not display delete button 1`] = `
-<span>
-  <img
-    alt="avatar"
-    className="profilePic"
-    src="http://localhost:3001/"
-  />
-</span>
+<ul
+  className="custom"
+>
+  <li>
+    <a
+      href="http://localhost:3001/"
+    >
+      <img
+        alt="preview"
+        src="http://localhost:3001/"
+      />
+      <div>
+        file-2
+      </div>
+    </a>
+  </li>
+</ul>
 `;
 
 exports[`Profile image is set to default empty tag 1`] = `
-<div
-  className="profilePic"
+<ul
+  className="custom"
 />
 `;

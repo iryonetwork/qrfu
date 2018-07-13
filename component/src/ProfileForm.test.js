@@ -21,5 +21,5 @@ beforeEach(() => {
 });
 
 test('Form loads', () => {
-    expect(wrapper.find('input').length).toEqual(3);
+    expect(wrapper.find('input').length).toEqual(1);
 });
