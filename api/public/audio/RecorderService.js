@@ -178,8 +178,8 @@ class RecorderService {
 
         // pass to global variable
         audioBlob = blob;
+        audioUrl = blobUrl;
 
-        // show audio preview
-        states.stopRecording(blobUrl);
+        states.onStopAudio();
     }
 }

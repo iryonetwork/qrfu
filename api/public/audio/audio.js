@@ -1,4 +1,4 @@
-var audioBlob, recorderService;
+var audioBlob, audioUrl, recorderService;
 
 var isSafari = function() {
     return window.safari ||
@@ -119,10 +119,11 @@ var onClickAudio = function(event) {
             chunks = [];
 
             audioBlob = blob;
-
-            states.stopRecording(url);
-
+            audioUrl = url;
+        
             stream.getTracks().forEach(track => track.stop()); // turn off mic
+
+            states.onStopAudio();
         };
 
         recorder.start();
@@ -179,14 +180,15 @@ var onUploadAudioAlt = function(event) {
 };
 
 var states = {
-    goBack: false,
+    quit: false,
     startRecording: (onStop) => {
         document.documentElement.style.background = '#000';
         document.getElementById('audioInput').style.display = 'none';
 
-        // document.getElementById('audioInputAlt').style.display = 'block';
-        // document.getElementById('audioInputAlt').className = 'fileHolder retake';
-    
+        document.getElementById('audioInputAlt').style.display = 'block';
+        document.getElementById('audioInputAlt').className = 'fileHolder retake';
+        document.getElementById('audioButtonAlt').innerText = 'IMPORT';
+        
         document.getElementById('submit').disabled = true;
     
         document.getElementById('audioContainer').style.display = 'none';
@@ -205,6 +207,10 @@ var states = {
 
         document.getElementsByClassName('circle')[0].style.animationName = '';
         document.getElementsByClassName('circle')[0].style.webkitAnimationName = '';
+
+        // clear saved audio data
+        audioBlob = null;
+        audioUrl = null;
         
         var count = 0;
         var timer = window.setInterval(() => {
@@ -221,22 +227,22 @@ var states = {
         }, 1000);
 
         document.getElementById('stopButton').onclick = function(e) {
+            document.getElementById('stopButton').onclick = null;
+
             document.getElementsByClassName('circle')[0].style.animationName = 'expand';
             document.getElementsByClassName('circle')[0].style.webkitAnimationName = 'expand';
 
-            document.getElementById('finishButton').style.display = 'block';
-
             window.clearInterval(timer);
+
+            states.quit = false;
+
+            onStop();
         };
 
         document.getElementById('finishButton').onclick = function(e) {
-            document.getElementById('timer').style.display = 'none';
-            document.getElementById('finishButton').style.display = 'none';
-            document.getElementById('audioControls').style.display = 'none';
-
-            states.goBack = false;
-
-            onStop();
+            if (audioBlob && audioUrl) {
+                states.stopRecording();
+            }
         };
 
         document.getElementById('backButton').onclick = function(e) {
@@ -244,6 +250,9 @@ var states = {
             document.getElementById('title').innerText = 'Upload Document';
             document.getElementById('audioControls').style.display = 'none';
             document.getElementById('finishButton').style.display = 'none';
+            document.getElementById('audioInputAlt').style.display = 'none';
+            document.getElementById('audioInputAlt').className = 'fileHolder';
+            document.getElementById('audioButtonAlt').innerText = 'UPLOAD AUDIO';
 
             document.getElementById('audioInput').style.display = 'block';
             document.getElementById('audioInput').className = 'fileHolder';
@@ -252,21 +261,46 @@ var states = {
             document.getElementById('timer').style.display = 'none';
             window.clearInterval(timer);
 
-            states.goBack = true;
+            states.quit = true;
+
+            if (audioBlob == null && audioUrl == null) {
+                onStop();
+            }
+        };
+
+        document.getElementById('audio').onchange = function() {
+            window.clearInterval(timer);
             
-            onStop();
+            states.quit = true;
+
+            if (audioBlob == null && audioUrl == null) {
+                onStop();
+            }
+
+            if (document.getElementById('audio').files.length > 0) {
+                let reader = new FileReader();
+
+                reader.onload = function(ev) {
+                    states.stopRecording();
+                    document.getElementById('audioPreview').src = ev.target.result;
+                    document.getElementById('upload').onsubmit = onUploadAudioAlt;                    
+                }
+        
+                reader.readAsDataURL(document.getElementById('audio').files[0]);
+            }
         };
     },
-    stopRecording: (url) => {
-        if (states.goBack) {
-            audioBlob = null;
-            return;
-        }
-
+    stopRecording: () => {
+        document.getElementById('timer').style.display = 'none';
+        document.getElementById('finishButton').style.display = 'none';
+        document.getElementById('audioControls').style.display = 'none';
+        document.getElementById('audioInputAlt').style.display = 'none';
+        document.getElementById('audioInputAlt').className = 'fileHolder';
+        document.getElementById('audioButtonAlt').innerText = 'UPLOAD AUDIO';
         document.documentElement.style.background = '#0296e6';
         document.getElementById('title').innerText = 'Upload Voice Recording';
         document.getElementById('audioContainer').style.display = 'flex';
-        document.getElementById('audioPreview').src = url;
+        document.getElementById('audioPreview').src = audioUrl;
         document.getElementById('audioButton').innerText = 'RETAKE';
         document.getElementById('audioInput').style.display = 'block';
         document.getElementById('audioInput').className = 'fileHolder retake';
@@ -277,4 +311,12 @@ var states = {
         alert('Recording not supported, switching to file selection.');
         setAltAudio();
     },
+    onStopAudio() {
+        if (states.quit) {
+            audioBlob = null;
+            audioUrl = null;
+        } else {
+            document.getElementById('finishButton').style.display = 'block';
+        }
+    }
 }
